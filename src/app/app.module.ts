@@ -6,19 +6,19 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from 'src/material.module';
 import { ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ToastrModule } from 'ngx-toastr';
 import { LoginComponent } from './login/login.component';
 import { HomeComponent } from './home/home.component';
-import { UserListComponent } from './user.list/user.list.component';
 import { UpdatepopupComponent } from './updatepopup/updatepopup.component';
+import { HttpRequestInterceptor } from './util/http.request.interpretor';
+import { UserModule } from './user/user.module';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     HomeComponent,
-    UserListComponent,
     UpdatepopupComponent
   ],
   imports: [
@@ -28,9 +28,15 @@ import { UpdatepopupComponent } from './updatepopup/updatepopup.component';
     MaterialModule,
     ReactiveFormsModule,
     HttpClientModule,
+    UserModule,
     ToastrModule.forRoot()
   ],
-  providers: [],
+  providers: [
+    // Http Interceptor(s) -  adds with Client Credentials
+    [
+      { provide: HTTP_INTERCEPTORS, useClass: HttpRequestInterceptor, multi: true }
+  ],
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
