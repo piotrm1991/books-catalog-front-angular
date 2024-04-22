@@ -1,6 +1,7 @@
 import { Component, DoCheck } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthenticationService } from './service/authentication.service';
+import { StorageService } from './util/storage.service';
 
 @Component({
   selector: 'app-root',
@@ -12,7 +13,7 @@ export class AppComponent implements DoCheck {
 
   showMenu = false;
 
-  constructor (private router: Router, private service: AuthenticationService) {}
+  constructor (private router: Router, private service: AuthenticationService, private storage: StorageService) {}
 
   ngDoCheck(): void {
     let currentUrl = this.router.url;
@@ -25,7 +26,7 @@ export class AppComponent implements DoCheck {
 
   logout() {
     this.service.logout().subscribe(() =>{
-      sessionStorage.clear();
+      this.storage.logOut();
       this.router.navigate(['/login']);
     });
   }

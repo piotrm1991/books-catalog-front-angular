@@ -21,7 +21,9 @@ export class LoginComponent implements OnInit{
   ) {}
 
   ngOnInit(): void {
-    console.log(this.storage.checkIfLoggedIn());
+    if (this.storage.checkIfLoggedIn()) {
+      this.router.navigate(['']);
+    }
   }
 
   loginForm = this.builder.group({
@@ -32,14 +34,14 @@ export class LoginComponent implements OnInit{
   onSubmit() {
     if (this.loginForm.valid) {
       this.service.login(this.loginForm.value.login, this.loginForm.value.password).subscribe({
-        next: data => {
-          this.storage.setLoggedInStatus(true);
+        next: (data: string | undefined) => {
+          this.storage.logIn();
           this.toastr.success(data, "", {
             positionClass: 'toast-top-center'
           });
           this.router.navigate(['']);
         },
-        error: err => {
+        error: () => {
           this.toastr.error('Invalid credentials!', '', {
             positionClass: 'toast-top-center'
           });

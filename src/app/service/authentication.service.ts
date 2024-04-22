@@ -2,7 +2,6 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '../util/environment';
 import { ApiPaths } from '../util/api.paths';
-import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +12,7 @@ export class AuthenticationService {
 
   constructor(private http : HttpClient) { }
 
-  login(login: any, password: any): Observable<any>  {
+  login(login: any, password: any): any  {
     let url = `${this.baseUrl}${ApiPaths.Login}`;
     return this.http.post(url, {}, {
       headers: this.prepareHeadersForBasicAuth(login, password),
@@ -29,7 +28,7 @@ export class AuthenticationService {
     return headers;
   }
 
-  logout(): Observable<any> {
+  logout(): any {
     let url = `${this.baseUrl}${ApiPaths.Logout}`;
     return this.http.delete(url, {});
   }

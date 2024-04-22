@@ -13,8 +13,6 @@ class PermissionsService  {
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): boolean {
       
-    console.log('permissions ' + this.storage.checkIfLoggedIn());
-      
     if (this.storage.checkIfLoggedIn()) {
       return true;
     } else {

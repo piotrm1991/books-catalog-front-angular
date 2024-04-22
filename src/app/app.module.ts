@@ -12,7 +12,7 @@ import { HomeComponent } from './home/home.component';
 import { UpdatepopupComponent } from './updatepopup/updatepopup.component';
 import { HttpRequestInterceptor } from './util/http.request.interpretor';
 import { UserModule } from './user/user.module';
-// import { CookieService } from 'ngx-cookie-service';
+import { CookieService } from 'ngx-cookie-service';
 
 @NgModule({
   declarations: [
@@ -35,7 +35,7 @@ import { UserModule } from './user/user.module';
   // Http Interceptor(s) -  adds with Client Credentials
   [
     { provide: HTTP_INTERCEPTORS, useClass: HttpRequestInterceptor, multi: true },
-    // CookieService 
+    CookieService 
   ],
   ],
   bootstrap: [AppComponent]
