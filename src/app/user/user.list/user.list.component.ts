@@ -1,7 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild  } from '@angular/core';
 import { UserService } from '../user.service';
 import { MatTableDataSource } from '@angular/material/table';
 import { DataSource } from '@angular/cdk/table';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
 
 @Component({
   selector: 'app-user.list',
@@ -16,6 +18,8 @@ export class UserListComponent {
   page: number = 0;
   size: number = 5;
   dataSource: any;
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+  @ViewChild(MatSort) sort!: MatSort;
 
   constructor (private service: UserService) {
     this.loadUsers();
@@ -25,6 +29,8 @@ export class UserListComponent {
     this.service.getAllUsers(this.page, this.size).subscribe(res => {
       this.userList = res;
       this.dataSource = new MatTableDataSource(this.userList.content);
+      this.dataSource.paginator = this.paginator;
+      this.dataSource.sort = this.sort;
     });
   }
 

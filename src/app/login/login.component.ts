@@ -1,22 +1,28 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { AuthenticationService } from '../service/authentication.service';
 import { Router } from '@angular/router';
+import { StorageService } from '../util/storage.service';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit{
 
   constructor (
     private builder: FormBuilder, 
     private toastr: ToastrService, 
     private service: AuthenticationService, 
-    private router: Router
+    private router: Router,
+    private storage: StorageService
   ) {}
+
+  ngOnInit(): void {
+    console.log(this.storage.checkIfLoggedIn());
+  }
 
   loginForm = this.builder.group({
     login: this.builder.control('', Validators.required),
@@ -27,16 +33,22 @@ export class LoginComponent {
     if (this.loginForm.valid) {
       this.service.login(this.loginForm.value.login, this.loginForm.value.password).subscribe({
         next: data => {
-          this.service.isLoggedIn = true;
-          this.toastr.success(data);
+          this.storage.setLoggedInStatus(true);
+          this.toastr.success(data, "", {
+            positionClass: 'toast-top-center'
+          });
           this.router.navigate(['']);
         },
         error: err => {
-          this.toastr.error('Invalid credentials!');
+          this.toastr.error('Invalid credentials!', '', {
+            positionClass: 'toast-top-center'
+          });
         }
       });
     } else {
-      this.toastr.error('Invalid credentials!');
+      this.toastr.error('Invalid credentials!', '', {
+        positionClass: 'toast-top-center'
+      });
     }
   };
 

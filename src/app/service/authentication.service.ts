@@ -9,8 +9,6 @@ import { Observable } from 'rxjs';
 })
 export class AuthenticationService {
 
-  isLoggedIn = false;
-
   baseUrl = environment.baseUrl;
 
   constructor(private http : HttpClient) { }

@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -13,6 +12,7 @@ import { HomeComponent } from './home/home.component';
 import { UpdatepopupComponent } from './updatepopup/updatepopup.component';
 import { HttpRequestInterceptor } from './util/http.request.interpretor';
 import { UserModule } from './user/user.module';
+// import { CookieService } from 'ngx-cookie-service';
 
 @NgModule({
   declarations: [
@@ -32,9 +32,10 @@ import { UserModule } from './user/user.module';
     ToastrModule.forRoot()
   ],
   providers: [
-    // Http Interceptor(s) -  adds with Client Credentials
-    [
-      { provide: HTTP_INTERCEPTORS, useClass: HttpRequestInterceptor, multi: true }
+  // Http Interceptor(s) -  adds with Client Credentials
+  [
+    { provide: HTTP_INTERCEPTORS, useClass: HttpRequestInterceptor, multi: true },
+    // CookieService 
   ],
   ],
   bootstrap: [AppComponent]

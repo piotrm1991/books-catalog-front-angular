@@ -3,8 +3,6 @@ import { AuthenticationService } from '../service/authentication.service';
 import { environment } from '../util/environment';
 import { ApiPaths } from '../util/api.paths';
 import { HttpClient } from '@angular/common/http';
-import { User } from '../models/user';
-import { Observable, map } from 'rxjs';
 
 const pageString = "?page=";
 
