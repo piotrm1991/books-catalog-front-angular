@@ -4,6 +4,7 @@ import { environment } from '../util/environment';
 import { ApiPaths } from '../util/api.paths';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { User } from '../models/user';
 
 const pageString = "?page=";
 
@@ -22,11 +23,26 @@ export class UserService {
 
   public getAllUsers(page : number, size : number): Observable<any> {
 
-    return this.http.get(this.generateUrlUsers(page, size));
+    return this.http.get(this.generateGetAllUsersUrl(page, size));
   }
 
-  private generateUrlUsers(pageNumber : number, pageSize : number): string {
+  private generateGetAllUsersUrl(pageNumber : number, pageSize : number): string {
 
     return `${this.baseUrl}${ApiPaths.USERS_PATH}${pageString}${pageNumber}${pageSizeString}${pageSize}`;
+  }
+
+  private generateUserByIdUrl(id: number): string {
+
+    return `${this.baseUrl}${ApiPaths.USERS_PATH}\\${id}`;
+  }
+
+  public getUserById(id: number): Observable<any> {
+
+    return this.http.get(this.generateUserByIdUrl(id));
+  }
+
+  public saveUpdatedUser(id: any, userData: any): Observable<any> {
+
+    return this.http.put(this.generateUserByIdUrl(id), userData);
   }
 }

@@ -9,7 +9,6 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ToastrModule } from 'ngx-toastr';
 import { LoginComponent } from './login/login.component';
 import { HomeComponent } from './home/home.component';
-import { UpdatepopupComponent } from './updatepopup/updatepopup.component';
 import { HttpRequestInterceptor } from './_helpers/http.request.interpretor';
 import { UserModule } from './user/user.module';
 import { CookieService } from 'ngx-cookie-service';
@@ -20,7 +19,6 @@ import { CoreModule } from './core/core.module';
     AppComponent,
     LoginComponent,
     HomeComponent,
-    UpdatepopupComponent
   ],
   imports: [
     BrowserModule,

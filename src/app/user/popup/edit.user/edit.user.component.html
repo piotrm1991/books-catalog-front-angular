@@ -1,0 +1,32 @@
+<h1 mat-dialog-title>Update User</h1>
+<form [formGroup]="updateForm" (ngSubmit)="saveUpdatedUser()">
+    <div mat-dialog-content>
+
+        <mat-form-field>
+            <mat-label>Login</mat-label>
+            <input formControlName="login" matInput>
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-label>Select Role</mat-label>
+            <mat-select formControlName="role">
+                <mat-option *ngFor="let item of roleList" [value]="item">
+                    {{item}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-label>Select Status</mat-label>
+            <mat-select formControlName="status">
+                <mat-option *ngFor="let item of statusList" [value]="item">
+                    {{item}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+    </div>
+    <div mat-dialog-actions>
+        <button type="submit" mat-raised-button color="primary" cdkFocusInitial>Save</button>
+        <button mat-raised-button color="warn" mat-dialog-close>Close</button>
+    </div>
+</form>

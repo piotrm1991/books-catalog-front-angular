@@ -8,6 +8,8 @@ import { ToastrService } from 'ngx-toastr';
 import { StorageService } from 'src/app/_services/storage.service';
 import { Router } from '@angular/router';
 import { AppPaths } from 'src/app/util/app.paths';
+import { MatDialog } from '@angular/material/dialog';
+import { EditUserComponent } from '../popup/edit.user/edit.user.component';
 
 @Component({
   selector: 'app-user.list',
@@ -16,24 +18,37 @@ import { AppPaths } from 'src/app/util/app.paths';
 })
 export class UserListComponent {
 
-  displayedColumns: string[] = ['id', 'login', 'status', 'createDate', 'updateDate', 'deleteDate', 'action'];
-
-  userList: any;
-  page: number = 0;
-  size: number = 5;
-  dataSource: any;
-  @ViewChild(MatPaginator) paginator!: MatPaginator;
-  @ViewChild(MatSort) sort!: MatSort;
-
   constructor (
-    private service:  UserService, 
-    private toastr:   ToastrService, 
-    private storage:  StorageService, 
-    private router:   Router
+    private service:    UserService, 
+    private toastr:     ToastrService, 
+    private storage:    StorageService, 
+    private router:     Router,
+    private dialogBox:  MatDialog
   ) {
 
     this.loadUsers();
   }
+
+  displayedColumns: string[] = 
+  [
+    'id', 
+    'login', 
+    'status', 
+    'role', 
+    'createDate', 
+    'updateDate', 
+    'deleteDate', 
+    'actions'
+  ];
+
+  userList: any;
+  dataSource: any;
+  page: number = 0;
+  size: number = 5;
+  @ViewChild(MatPaginator) 
+  paginator!: MatPaginator;
+  @ViewChild(MatSort) 
+  sort!: MatSort;
 
   private loadUsers(): void {
     this.service.getAllUsers(this.page, this.size).subscribe({
@@ -54,10 +69,24 @@ export class UserListComponent {
   }
 
   editUser(id: number) {
-
+    this.openDialog('1000ms', '600ms', id);
   }
 
   deleteUser(id: number) {
 
+  }
+
+  private openDialog(enteranimation: any, exitanimation: any, id: number) {
+    const popup = this.dialogBox.open(EditUserComponent, {
+      enterAnimationDuration: enteranimation,
+      exitAnimationDuration: exitanimation,
+      width: '30%',
+      data: {
+        userId: id
+      }
+    });
+    popup.afterClosed().subscribe(() => {
+      this.loadUsers();
+    });
   }
 }
