@@ -10,9 +10,10 @@ import { ToastrModule } from 'ngx-toastr';
 import { LoginComponent } from './login/login.component';
 import { HomeComponent } from './home/home.component';
 import { UpdatepopupComponent } from './updatepopup/updatepopup.component';
-import { HttpRequestInterceptor } from './util/http.request.interpretor';
+import { HttpRequestInterceptor } from './_helpers/http.request.interpretor';
 import { UserModule } from './user/user.module';
 import { CookieService } from 'ngx-cookie-service';
+import { CoreModule } from './core/core.module';
 
 @NgModule({
   declarations: [
@@ -29,14 +30,15 @@ import { CookieService } from 'ngx-cookie-service';
     ReactiveFormsModule,
     HttpClientModule,
     UserModule,
+    CoreModule,
     ToastrModule.forRoot()
   ],
   providers: [
-  // Http Interceptor(s) -  adds with Client Credentials
-  [
-    { provide: HTTP_INTERCEPTORS, useClass: HttpRequestInterceptor, multi: true },
-    CookieService 
-  ],
+    // Http Interceptor(s) -  adds with Client Credentials
+    [
+      { provide: HTTP_INTERCEPTORS, useClass: HttpRequestInterceptor, multi: true },
+      CookieService 
+    ],
   ],
   bootstrap: [AppComponent]
 })

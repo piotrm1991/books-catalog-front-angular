@@ -4,6 +4,10 @@ import { MatTableDataSource } from '@angular/material/table';
 import { DataSource } from '@angular/cdk/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
+import { ToastrService } from 'ngx-toastr';
+import { StorageService } from 'src/app/_services/storage.service';
+import { Router } from '@angular/router';
+import { AppPaths } from 'src/app/util/app.paths';
 
 @Component({
   selector: 'app-user.list',
@@ -21,16 +25,31 @@ export class UserListComponent {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
-  constructor (private service: UserService) {
+  constructor (
+    private service:  UserService, 
+    private toastr:   ToastrService, 
+    private storage:  StorageService, 
+    private router:   Router
+  ) {
+
     this.loadUsers();
   }
 
-  loadUsers() {
-    this.service.getAllUsers(this.page, this.size).subscribe(res => {
-      this.userList = res;
-      this.dataSource = new MatTableDataSource(this.userList.content);
-      this.dataSource.paginator = this.paginator;
-      this.dataSource.sort = this.sort;
+  private loadUsers(): void {
+    this.service.getAllUsers(this.page, this.size).subscribe({
+      next: (data) => {
+        this.userList = data;
+        this.dataSource = new MatTableDataSource(this.userList.content);
+        this.dataSource.paginator = this.paginator;
+        this.dataSource.sort = this.sort;
+      },
+      error: () => {
+        this.storage.logOut();
+        this.router.navigate([AppPaths.LOGIN_PATH]);
+        this.toastr.error('Session ended!', '', {
+          positionClass: 'toast-top-center'
+        });
+      }
     });
   }
 

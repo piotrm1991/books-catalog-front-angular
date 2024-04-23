@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
-import { AuthenticationService } from '../service/authentication.service';
+import { AuthenticationService } from '../_services/authentication.service';
 import { Router } from '@angular/router';
-import { StorageService } from '../util/storage.service';
+import { StorageService } from '../_services/storage.service';
 
 @Component({
   selector: 'app-login',
@@ -37,19 +37,19 @@ export class LoginComponent implements OnInit{
         next: (data: string | undefined) => {
           this.storage.logIn();
           this.toastr.success(data, "", {
-            positionClass: 'toast-top-center'
+            positionClass: 'toastr-top-center'
           });
           this.router.navigate(['']);
         },
         error: () => {
           this.toastr.error('Invalid credentials!', '', {
-            positionClass: 'toast-top-center'
+            positionClass: 'toastr-top-center'
           });
         }
       });
     } else {
       this.toastr.error('Invalid credentials!', '', {
-        positionClass: 'toast-top-center'
+        positionClass: 'toastr-top-center'
       });
     }
   };

@@ -13,7 +13,7 @@ export class AuthenticationService {
   constructor(private http : HttpClient) { }
 
   login(login: any, password: any): any  {
-    let url = `${this.baseUrl}${ApiPaths.Login}`;
+    let url = `${this.baseUrl}${ApiPaths.LOGIN_PATH}`;
     return this.http.post(url, {}, {
       headers: this.prepareHeadersForBasicAuth(login, password),
       responseType: 'text'
@@ -23,13 +23,19 @@ export class AuthenticationService {
   prepareHeadersForBasicAuth(login: string, password: string): HttpHeaders {
     let headers: HttpHeaders = new HttpHeaders();
     headers = headers.append("Content-Type", "application/json");
-    headers = headers.append("X-Requested-With", "XMLHttpRequest");
     headers = headers.append("Authorization", 'Basic ' + window.btoa(login + ":" + password));
     return headers;
   }
 
   logout(): any {
-    let url = `${this.baseUrl}${ApiPaths.Logout}`;
+    let url = `${this.baseUrl}${ApiPaths.LOGOUT_PATH}`;
     return this.http.delete(url, {});
+  }
+
+  getCurrentUserRole(): any {
+    let url = `${this.baseUrl}${ApiPaths.CURRENT_ROLE}`;
+    return this.http.get(url, {
+      responseType: 'text'
+    });
   }
 }

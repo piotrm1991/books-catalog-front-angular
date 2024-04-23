@@ -1,5 +1,6 @@
 export enum ApiPaths {
-    Login = '/login',
-    Logout = '/logout',
-    Users = '/users'
+    LOGIN_PATH = '/login',
+    LOGOUT_PATH = '/logout',
+    USERS_PATH = '/users',
+    CURRENT_ROLE = '/currentUserRole'
 };

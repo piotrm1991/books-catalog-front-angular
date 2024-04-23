@@ -1,7 +1,5 @@
 import { Component, DoCheck } from '@angular/core';
 import { Router } from '@angular/router';
-import { AuthenticationService } from './service/authentication.service';
-import { StorageService } from './util/storage.service';
 
 @Component({
   selector: 'app-root',
@@ -9,11 +7,11 @@ import { StorageService } from './util/storage.service';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements DoCheck {
-  title = 'books-catalog-front-angular';
+  title = 'Books Catalog';
 
   showMenu = false;
 
-  constructor (private router: Router, private service: AuthenticationService, private storage: StorageService) {}
+  constructor (private router: Router) {}
 
   ngDoCheck(): void {
     let currentUrl = this.router.url;
@@ -22,12 +20,5 @@ export class AppComponent implements DoCheck {
     } else {
       this.showMenu = true;
     }
-  }
-
-  logout() {
-    this.service.logout().subscribe(() =>{
-      this.storage.logOut();
-      this.router.navigate(['/login']);
-    });
   }
 }

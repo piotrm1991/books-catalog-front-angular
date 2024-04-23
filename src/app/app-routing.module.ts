@@ -4,11 +4,12 @@ import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
 import { UserListComponent } from './user/user.list/user.list.component';
 import { AuthGuard } from './guard/permissions.service';
+import { AppPaths } from './util/app.paths';
 
 const routes: Routes = [
-  { path: '', component: HomeComponent, canActivate: [AuthGuard] },
-  { path: 'login', component: LoginComponent },
-  { path: 'users', component: UserListComponent, canActivate: [AuthGuard] }
+  { path: AppPaths.HOME_PATH, component: HomeComponent, canActivate: [AuthGuard] },
+  { path: AppPaths.LOGIN_PATH, component: LoginComponent },
+  { path: AppPaths.USERS_PATH, component: UserListComponent, canActivate: [AuthGuard] }
 ];
 
 @NgModule({
