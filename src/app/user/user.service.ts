@@ -1,10 +1,8 @@
 import { Injectable } from '@angular/core';
-import { AuthenticationService } from '../_services/authentication.service';
 import { environment } from '../util/environment';
 import { ApiPaths } from '../util/api.paths';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
-import { User } from '../models/user';
+import { Observable, map } from 'rxjs';
 
 const pageString = "?page=";
 
@@ -31,6 +29,10 @@ export class UserService {
     return `${this.baseUrl}${ApiPaths.USERS_PATH}${pageString}${pageNumber}${pageSizeString}${pageSize}`;
   }
 
+  private generateUsersUrl(): string {
+
+    return `${this.baseUrl}${ApiPaths.USERS_PATH}`;
+  }
   private generateUserByIdUrl(id: number): string {
 
     return `${this.baseUrl}${ApiPaths.USERS_PATH}\\${id}`;
@@ -44,5 +46,15 @@ export class UserService {
   public saveUpdatedUser(id: any, userData: any): Observable<any> {
 
     return this.http.put(this.generateUserByIdUrl(id), userData);
+  }
+
+  public disableUserById(id: number): Observable<any> {
+    
+    return this.http.delete(this.generateUserByIdUrl(id));
+  }
+
+  public saveNewdUser(userData: any): Observable<any> {
+
+    return this.http.post(this.generateUsersUrl(), userData);
   }
 }

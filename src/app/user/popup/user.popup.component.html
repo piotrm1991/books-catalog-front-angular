@@ -1,10 +1,22 @@
 <h1 mat-dialog-title>Update User</h1>
-<form [formGroup]="updateForm" (ngSubmit)="saveUpdatedUser()">
+<form [formGroup]="updateForm" (ngSubmit)="saveUser()">
     <div mat-dialog-content>
 
         <mat-form-field>
             <mat-label>Login</mat-label>
             <input formControlName="login" matInput>
+        </mat-form-field>
+
+        <mat-form-field *ngIf="!editFormFlag">
+            <mat-label>Password</mat-label>
+            <input formControlName="password" matInput [type]="hidePass ? 'password' : 'text'" >
+            <mat-icon matSuffix (click)="hidePass = !hidePass">{{hidePass ? 'visibility_off' : 'visibility'}}</mat-icon>
+        </mat-form-field>
+
+        <mat-form-field *ngIf="!editFormFlag">
+            <mat-label>Password Confirm</mat-label>
+            <input formControlName="confirmPassword" matInput [type]="hidePassConf ? 'password' : 'text'" >
+            <mat-icon matSuffix (click)="hidePassConf = !hidePassConf">{{hidePassConf ? 'visibility_off' : 'visibility'}}</mat-icon>
         </mat-form-field>
 
         <mat-form-field>
@@ -16,7 +28,7 @@
             </mat-select>
         </mat-form-field>
 
-        <mat-form-field>
+        <mat-form-field *ngIf="editFormFlag">
             <mat-label>Select Status</mat-label>
             <mat-select formControlName="status">
                 <mat-option *ngFor="let item of statusList" [value]="item">
