@@ -11,16 +11,16 @@ import { AppPaths } from 'src/app/util/constants/app.paths';
 import { GenericPopupComponent } from 'src/app/util/generic.popup/generic.popup.component';
 import { ModelList } from 'src/app/util/constants/model.list';
 import { Roles } from 'src/app/util/constants/roles';
-import { PublisherService } from '../publisher.service';
 import { environment } from 'src/app/util/constants/environment';
-import { Publisher } from 'src/app/models/publisher';
+import { RoomService } from '../room.service';
+import { Room } from 'src/app/models/room';
 
 @Component({
   selector: 'app-list',
-  templateUrl: './publisher.list.component.html',
-  styleUrl: './publisher.list.component.css'
+  templateUrl: './room.list.component.html',
+  styleUrl: './room.list.component.css'
 })
-export class PublisherListComponent implements AfterViewInit {
+export class RoomListComponent implements AfterViewInit {
   
   private animationTimings = environment.dialogAnimationTimings;
 
@@ -33,7 +33,7 @@ export class PublisherListComponent implements AfterViewInit {
     'actions'
   ];
 
-  userList: Publisher[] = [];
+  userList: Room[] = [];
   dataSource: any;
   pageSize = 5;
   pageIndex = 0;
@@ -42,7 +42,7 @@ export class PublisherListComponent implements AfterViewInit {
   @ViewChild(MatSort) sort!: MatSort;
 
   constructor (
-    private service:                PublisherService, 
+    private service:                RoomService, 
     private toastr:                 ToastrService, 
     private storage:                StorageService, 
     private router:                 Router,
@@ -109,7 +109,7 @@ export class PublisherListComponent implements AfterViewInit {
           Roles.ADMIN_ROLE,
           Roles.USER_ROLE
         ],
-        model: ModelList.PUBLISHER
+        model: ModelList.ROOM
       }
     });
     popup.afterClosed().subscribe(() => {

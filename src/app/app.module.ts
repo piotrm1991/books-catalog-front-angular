@@ -16,6 +16,7 @@ import { CoreModule } from './core/core.module';
 import { StatusTypeModule } from './status.type/status.type.module';
 import { AuthorModule } from './author/author.module';
 import { PublisherModule } from './publisher/publisher.module';
+import { RoomModule } from './room/room.module';
 
 @NgModule({
   declarations: [
@@ -35,6 +36,7 @@ import { PublisherModule } from './publisher/publisher.module';
     StatusTypeModule,
     AuthorModule,
     PublisherModule,
+    RoomModule,
     ToastrModule.forRoot()
   ],
   providers: [

@@ -5,6 +5,7 @@ import { ToastrService } from 'ngx-toastr';
 import { StatusTypeService } from '../status.type/status.type.service';
 import { AuthorService } from '../author/author.service';
 import { PublisherService } from '../publisher/publisher.service';
+import { RoomService } from '../room/room.service';
 
 @Injectable({
   providedIn: 'root'
@@ -39,6 +40,10 @@ export class FormBuilderAndServiceProviderService {
 
         return PublisherService;
       }
+      case ModelList.ROOM: {
+
+        return RoomService;
+      }
       default:{
         this.toastr.error('Unexpected error occured!');
         return null;
@@ -61,6 +66,10 @@ export class FormBuilderAndServiceProviderService {
 
         return this.buildFormPublisher();
       }
+      case ModelList.ROOM: {
+
+        return this.buildFormRoom();
+      }
       default:{
         this.toastr.error('Unexpected error occured!');
         return null;
@@ -69,6 +78,14 @@ export class FormBuilderAndServiceProviderService {
   }
 
   private buildFormStatusType(): FormGroup {
+
+    return this.builder.group({
+      id:   this.builder.control('', Validators.required),
+      name:  this.builder.control('', [Validators.required, Validators.minLength(4)]),
+    });
+  }
+
+  private buildFormRoom(): FormGroup {
 
     return this.builder.group({
       id:   this.builder.control('', Validators.required),

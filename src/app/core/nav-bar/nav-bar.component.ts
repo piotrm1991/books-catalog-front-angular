@@ -51,6 +51,10 @@ export class NavBarComponent implements DoCheck {
     this.openDialogGenericPopup(this.animationTimings.openAnimationTime, this.animationTimings.closeAnimationTime, [Roles.ADMIN_ROLE, Roles.USER_ROLE], ModelList.PUBLISHER, AppPaths.PUBLISHERS_PATH);
   }
 
+  protected addNewRoom(): void {
+    this.openDialogGenericPopup(this.animationTimings.openAnimationTime, this.animationTimings.closeAnimationTime, [Roles.ADMIN_ROLE, Roles.USER_ROLE], ModelList.ROOM, AppPaths.ROOMS_PATH);
+  }
+
   private openDialogAddUser(enteranimation: any, exitanimation: any) {
     const popup = this.dialogBox.open(UserPopupComponent, {
       enterAnimationDuration: enteranimation,
