@@ -5,7 +5,8 @@ import { AuthenticationService } from 'src/app/_services/authentication.service'
 import { StorageService } from 'src/app/_services/storage.service';
 import { UserPopupComponent } from 'src/app/user/popup/user.popup.component';
 import { AppPaths } from 'src/app/util/constants/app.paths';
-import { Models } from 'src/app/util/constants/model';
+import { environment } from 'src/app/util/constants/environment';
+import { ModelList } from 'src/app/util/constants/model.list';
 import { Roles } from 'src/app/util/constants/roles';
 import { GenericPopupComponent } from 'src/app/util/generic.popup/generic.popup.component';
 
@@ -16,7 +17,8 @@ import { GenericPopupComponent } from 'src/app/util/generic.popup/generic.popup.
 })
 export class NavBarComponent implements DoCheck {
 
-  showButtons = false;
+  protected showButtons = false;
+  private animationTimings = environment.dialogAnimationTimings;
 
   constructor(
     private service:    AuthenticationService,
@@ -34,11 +36,19 @@ export class NavBarComponent implements DoCheck {
   }
 
   protected addNewUser(): void {
-    this.openDialogAddUser('1000ms', '600ms');
+    this.openDialogAddUser(this.animationTimings.openAnimationTime, this.animationTimings.closeAnimationTime);
   }
 
   protected addNewStatusType(): void {
-    this.openDialogStatusType('1000ms', '600ms');
+    this.openDialogGenericPopup(this.animationTimings.openAnimationTime, this.animationTimings.closeAnimationTime, [Roles.ADMIN_ROLE], ModelList.STATUS_TYPE, AppPaths.STATUS_TYPES_PATH);
+  }
+
+  protected addNewAuthor(): void {
+    this.openDialogGenericPopup(this.animationTimings.openAnimationTime, this.animationTimings.closeAnimationTime, [Roles.ADMIN_ROLE, Roles.USER_ROLE], ModelList.AUTHOR, AppPaths.AUTHORS_PATH);
+  }
+
+  protected addNewPublisher(): void {
+    this.openDialogGenericPopup(this.animationTimings.openAnimationTime, this.animationTimings.closeAnimationTime, [Roles.ADMIN_ROLE, Roles.USER_ROLE], ModelList.PUBLISHER, AppPaths.PUBLISHERS_PATH);
   }
 
   private openDialogAddUser(enteranimation: any, exitanimation: any) {
@@ -57,19 +67,19 @@ export class NavBarComponent implements DoCheck {
     });
   }
 
-  private openDialogStatusType(enteranimation: any, exitanimation: any) {
+  private openDialogGenericPopup(enteranimation: any, exitanimation: any, roles: string[], model: string, path: string) {
     const popup = this.dialogBox.open(GenericPopupComponent, {
       enterAnimationDuration: enteranimation,
       exitAnimationDuration: exitanimation,
       width: '40%',
       data: {
         id: null,
-        allowedRole: Roles.ADMIN_ROLE,
-        model: Models.STATUS_TYPE
+        allowedRoles: roles,
+        model: model
       }
     });
     popup.afterClosed().subscribe(() => {
-      if (this.router.url == "/" + AppPaths.STATUS_TYPES_PATH) {
+      if (this.router.url == "/" + path) {
         window.location.reload();
       }
     });

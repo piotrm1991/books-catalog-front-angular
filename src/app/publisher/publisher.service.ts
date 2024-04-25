@@ -12,10 +12,10 @@ const pageSizeString = "&size=";
 @Injectable({
   providedIn: 'root'
 })
-export class StatusTypeService implements DataServiceInterface {
+export class PublisherService implements DataServiceInterface {
 
   private baseUrl = environment.baseUrl;
-  private resourcePath = ApiPaths.STATUS_TYPES_PATH;
+  private resourcePath = ApiPaths.PUBLISHERS_PATH;
 
   constructor(
     private http : HttpClient

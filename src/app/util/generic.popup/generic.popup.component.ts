@@ -29,10 +29,9 @@ export class GenericPopupComponent implements OnInit {
 
   private service!: DataServiceInterface;
 
-  private allowedRole!: string;
-
   protected model!: string;
   protected modelTitle!: string;
+  private allowedRoles!: string[];
 
   constructor(
     private toastr:     ToastrService,
@@ -53,14 +52,12 @@ export class GenericPopupComponent implements OnInit {
   }
 
   ngOnInit(): void {
-  
-    if (this.data.allowedRole != null) {
-      this.allowedRole = this.data.allowedRole;
-    } else {
-      this.refuseAccess();
+
+    if (this.data.allowedRoles != null) {
+      this.allowedRoles = this.data.allowedRoles;
     }
 
-    if (this.storage.getCurrentUserRole() != this.allowedRole) {
+    if (!this.allowedRoles.includes(this.storage.getCurrentUserRole())) {
       this.refuseAccess();
     }
     
@@ -127,6 +124,7 @@ export class GenericPopupComponent implements OnInit {
     this.toastr.error('You do not have access!', '', {
       positionClass: 'toast-top-center'
     });
+    this.dialogRef.close();
     this.router.navigate([AppPaths.HOME_PATH]);
   }
 }

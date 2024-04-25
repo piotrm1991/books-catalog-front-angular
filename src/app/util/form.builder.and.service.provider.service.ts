@@ -1,8 +1,10 @@
 import { Injectable } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Models } from './constants/model';
+import { ModelList } from './constants/model.list';
 import { ToastrService } from 'ngx-toastr';
 import { StatusTypeService } from '../status.type/status.type.service';
+import { AuthorService } from '../author/author.service';
+import { PublisherService } from '../publisher/publisher.service';
 
 @Injectable({
   providedIn: 'root'
@@ -25,9 +27,17 @@ export class FormBuilderAndServiceProviderService {
   private getService(modelName: string): any {
 
     switch(modelName) {
-      case Models.STATUS_TYPE: {
+      case ModelList.STATUS_TYPE: {
 
         return StatusTypeService;
+      }
+      case ModelList.AUTHOR: {
+
+        return AuthorService;
+      }
+      case ModelList.PUBLISHER: {
+
+        return PublisherService;
       }
       default:{
         this.toastr.error('Unexpected error occured!');
@@ -39,9 +49,17 @@ export class FormBuilderAndServiceProviderService {
   private buildForm(modelName: string): FormGroup | null {
 
     switch(modelName) {
-      case Models.STATUS_TYPE: {
+      case ModelList.STATUS_TYPE: {
 
         return this.buildFormStatusType();
+      }
+      case ModelList.AUTHOR: {
+
+        return this.buildFormAuthor();
+      }
+      case ModelList.PUBLISHER: {
+
+        return this.buildFormPublisher();
       }
       default:{
         this.toastr.error('Unexpected error occured!');
@@ -55,6 +73,22 @@ export class FormBuilderAndServiceProviderService {
     return this.builder.group({
       id:   this.builder.control('', Validators.required),
       name:  this.builder.control('', [Validators.required, Validators.minLength(4)]),
+    });
+  }
+
+  private buildFormAuthor(): FormGroup {
+
+    return this.builder.group({
+      id:   this.builder.control('', Validators.required),
+      name:  this.builder.control('', [Validators.required, Validators.minLength(6)]),
+    });
+  }
+
+  private buildFormPublisher(): FormGroup {
+
+    return this.builder.group({
+      id:   this.builder.control('', Validators.required),
+      name:  this.builder.control('', [Validators.required, Validators.minLength(6)]),
     });
   }
 }

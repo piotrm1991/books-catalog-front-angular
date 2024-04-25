@@ -11,6 +11,7 @@ import { AppPaths } from 'src/app/util/constants/app.paths';
 import { MatDialog } from '@angular/material/dialog';
 import { UserPopupComponent } from '../popup/user.popup.component';
 import { User } from 'src/app/models/user';
+import { environment } from 'src/app/util/constants/environment';
 
 @Component({
   selector: 'app-user.list',
@@ -18,6 +19,8 @@ import { User } from 'src/app/models/user';
   styleUrls: ['./user.list.component.css'],
 })
 export class UserListComponent implements AfterViewInit {
+  
+  private animationTimings = environment.dialogAnimationTimings;
 
   pageSizeOptions = [5, 10, 15];
 
@@ -74,7 +77,7 @@ export class UserListComponent implements AfterViewInit {
   }
 
   editUser(id: number) {
-    this.openDialog('1000ms', '600ms', id);
+    this.openDialog(this.animationTimings.openAnimationTime, this.animationTimings.closeAnimationTime, id);
   }
 
   deleteUser(id: number) {

@@ -10,6 +10,16 @@
         <button mat-menu-item (click)="addNewStatusType()">Add Status Type</button>
         <button mat-menu-item routerLink="/statusTypes">Status Types</button>
       </mat-menu>
+      <button mat-button [matMenuTriggerFor]="menuAuthors">Authors</button>
+      <mat-menu #menuAuthors="matMenu">
+        <button mat-menu-item (click)="addNewAuthor()">Add Author</button>
+        <button mat-menu-item routerLink="/authors">Authors</button>
+      </mat-menu>
+      <button mat-button [matMenuTriggerFor]="menuPublishers">Publishers</button>
+      <mat-menu #menuPublishers="matMenu">
+        <button mat-menu-item (click)="addNewPublisher()">Add Publisher</button>
+        <button mat-menu-item routerLink="/publishers">Publishers</button>
+      </mat-menu>
       <a mat-button (click)="logout()">Logout</a>
     </div>
   </mat-toolbar-row>

@@ -14,6 +14,8 @@ import { UserModule } from './user/user.module';
 import { CookieService } from 'ngx-cookie-service';
 import { CoreModule } from './core/core.module';
 import { StatusTypeModule } from './status.type/status.type.module';
+import { AuthorModule } from './author/author.module';
+import { PublisherModule } from './publisher/publisher.module';
 
 @NgModule({
   declarations: [
@@ -31,6 +33,8 @@ import { StatusTypeModule } from './status.type/status.type.module';
     UserModule,
     CoreModule,
     StatusTypeModule,
+    AuthorModule,
+    PublisherModule,
     ToastrModule.forRoot()
   ],
   providers: [
