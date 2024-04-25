@@ -7,9 +7,9 @@ import { MatSort } from '@angular/material/sort';
 import { ToastrService } from 'ngx-toastr';
 import { StorageService } from 'src/app/_services/storage.service';
 import { Router } from '@angular/router';
-import { AppPaths } from 'src/app/util/app.paths';
+import { AppPaths } from 'src/app/util/constants/app.paths';
 import { MatDialog } from '@angular/material/dialog';
-import { UserPopupComponent } from '../popup/user.poup.component';
+import { UserPopupComponent } from '../popup/user.popup.component';
 import { User } from 'src/app/models/user';
 
 @Component({
@@ -58,11 +58,10 @@ export class UserListComponent implements AfterViewInit {
   }
 
   public loadUsers(): void {
-    this.service.getAllUsers(this.pageIndex, this.pageSize).subscribe({
+    this.service.getAllByPageSize(this.pageIndex, this.pageSize).subscribe({
       next: (data) => {
         this.totalItems = data.totalElements;
         this.dataSource = new MatTableDataSource<User>(data.content);
-        console.log(data);
       },
       error: () => {
         this.storage.logOut();
@@ -79,7 +78,7 @@ export class UserListComponent implements AfterViewInit {
   }
 
   deleteUser(id: number) {
-    this.service.disableUserById(id).subscribe({
+    this.service.deleteEntityById(id).subscribe({
       next: () => {
         this.loadUsers();
       },
@@ -96,7 +95,6 @@ export class UserListComponent implements AfterViewInit {
   onPageChange(event: PageEvent) {
     this.pageIndex = event.pageIndex;
     this.pageSize = event.pageSize;
-    console.log(event);
     this.loadUsers();
   }
 
@@ -104,7 +102,7 @@ export class UserListComponent implements AfterViewInit {
     const popup = this.dialogBox.open(UserPopupComponent, {
       enterAnimationDuration: enteranimation,
       exitAnimationDuration: exitanimation,
-      width: '30%',
+      width: '40%',
       data: {
         userId: id
       }

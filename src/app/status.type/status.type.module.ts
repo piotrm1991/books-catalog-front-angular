@@ -1,16 +1,16 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { UserListComponent } from './list/user.list.component';
+import { StatusTypeListComponent } from './list/status.type.list.component';
 import { MaterialModule } from 'src/material.module';
-import { BrowserModule } from '@angular/platform-browser';
-import { UserPopupComponent } from './popup/user.popup.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
+
 
 @NgModule({
   declarations: [
-    UserListComponent,
-    UserPopupComponent
+    StatusTypeListComponent
   ],
   imports: [
     MaterialModule,
@@ -20,8 +20,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     ReactiveFormsModule
   ],
   exports: [
-    UserListComponent,
-    UserPopupComponent
+    StatusTypeListComponent
   ]
 })
-export class UserModule { }
+export class StatusTypeModule { }

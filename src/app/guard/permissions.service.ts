@@ -1,8 +1,8 @@
 import { Injectable, inject  } from '@angular/core';
 import { ActivatedRouteSnapshot, CanActivateFn , Router, RouterStateSnapshot } from '@angular/router';
 import { StorageService } from '../_services/storage.service';
-import { AppPaths } from '../util/app.paths';
-import { Roles } from '../util/roles';
+import { AppPaths } from '../util/constants/app.paths';
+import { Roles } from '../util/constants/roles';
 import { ToastrService } from 'ngx-toastr';
 
 @Injectable({
@@ -23,7 +23,7 @@ class PermissionsService  {
     if (this.storage.checkIfLoggedIn()) {
       if (next.url.length > 0) {
         let urlPath = next.url[0].path;
-        if (urlPath == AppPaths.USERS_PATH) {
+        if (this.getAdminOnlyPathList().includes(urlPath)) {
           if (this.storage.getCurrentUserRole() == Roles.ADMIN_ROLE) {
 
             return true;
@@ -45,6 +45,14 @@ class PermissionsService  {
 
       return false;
     }
+  }
+
+  private getAdminOnlyPathList(): String[] {
+
+    return [
+      AppPaths.USERS_PATH,
+      AppPaths.STATUS_TYPES_PATH
+    ];
   }
 }
 

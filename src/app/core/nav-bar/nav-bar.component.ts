@@ -3,9 +3,11 @@ import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { AuthenticationService } from 'src/app/_services/authentication.service';
 import { StorageService } from 'src/app/_services/storage.service';
-import { UserPopupComponent } from 'src/app/user/popup/user.poup.component';
-import { AppPaths } from 'src/app/util/app.paths';
-import { Roles } from 'src/app/util/roles';
+import { UserPopupComponent } from 'src/app/user/popup/user.popup.component';
+import { AppPaths } from 'src/app/util/constants/app.paths';
+import { Models } from 'src/app/util/constants/model';
+import { Roles } from 'src/app/util/constants/roles';
+import { GenericPopupComponent } from 'src/app/util/generic.popup/generic.popup.component';
 
 @Component({
   selector: 'nav-bar',
@@ -32,23 +34,45 @@ export class NavBarComponent implements DoCheck {
   }
 
   protected addNewUser(): void {
-    this.openDialog('1000ms', '600ms');
+    this.openDialogAddUser('1000ms', '600ms');
   }
 
-  private openDialog(enteranimation: any, exitanimation: any) {
+  protected addNewStatusType(): void {
+    this.openDialogStatusType('1000ms', '600ms');
+  }
+
+  private openDialogAddUser(enteranimation: any, exitanimation: any) {
     const popup = this.dialogBox.open(UserPopupComponent, {
       enterAnimationDuration: enteranimation,
       exitAnimationDuration: exitanimation,
-      width: '30%',
+      width: '40%',
       data: {
         userId: null
       }
     });
-    if (this.router.url == AppPaths.USERS_PATH) {
-      popup.afterClosed().subscribe(() => {
-        this.router.navigate([AppPaths.USERS_PATH]);
-      });
-    }
+    popup.afterClosed().subscribe(() => {
+      if (this.router.url == "/" + AppPaths.USERS_PATH) {
+        window.location.reload();
+      }
+    });
+  }
+
+  private openDialogStatusType(enteranimation: any, exitanimation: any) {
+    const popup = this.dialogBox.open(GenericPopupComponent, {
+      enterAnimationDuration: enteranimation,
+      exitAnimationDuration: exitanimation,
+      width: '40%',
+      data: {
+        id: null,
+        allowedRole: Roles.ADMIN_ROLE,
+        model: Models.STATUS_TYPE
+      }
+    });
+    popup.afterClosed().subscribe(() => {
+      if (this.router.url == "/" + AppPaths.STATUS_TYPES_PATH) {
+        window.location.reload();
+      }
+    });
   }
 
   protected logout() {

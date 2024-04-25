@@ -13,6 +13,7 @@ import { HttpRequestInterceptor } from './_helpers/http.request.interpretor';
 import { UserModule } from './user/user.module';
 import { CookieService } from 'ngx-cookie-service';
 import { CoreModule } from './core/core.module';
+import { StatusTypeModule } from './status.type/status.type.module';
 
 @NgModule({
   declarations: [
@@ -29,6 +30,7 @@ import { CoreModule } from './core/core.module';
     HttpClientModule,
     UserModule,
     CoreModule,
+    StatusTypeModule,
     ToastrModule.forRoot()
   ],
   providers: [

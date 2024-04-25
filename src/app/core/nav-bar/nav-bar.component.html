@@ -6,6 +6,9 @@
       <mat-menu #menu="matMenu">
         <button mat-menu-item (click)="addNewUser()">Add User</button>
         <button mat-menu-item routerLink="/users">Users</button>
+        <mat-divider></mat-divider>
+        <button mat-menu-item (click)="addNewStatusType()">Add Status Type</button>
+        <button mat-menu-item routerLink="/statusTypes">Status Types</button>
       </mat-menu>
       <a mat-button (click)="logout()">Logout</a>
     </div>

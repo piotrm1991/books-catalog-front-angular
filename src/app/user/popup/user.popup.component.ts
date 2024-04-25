@@ -4,17 +4,17 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { StorageService } from 'src/app/_services/storage.service';
-import { AppPaths } from 'src/app/util/app.paths';
-import { Roles } from 'src/app/util/roles';
+import { AppPaths } from 'src/app/util/constants/app.paths';
+import { Roles } from 'src/app/util/constants/roles';
 import { UserService } from '../user.service';
-import { Statuses } from 'src/app/util/statuses';
+import { Statuses } from 'src/app/util/constants/statuses';
 
 @Component({
   selector: 'user.popup.',
   templateUrl: './user.popup.component.html',
   styleUrl: './user.popup.component.css'
 })
-export class UserPopupComponent  implements OnInit, DoCheck {
+export class UserPopupComponent implements OnInit, DoCheck {
 
   protected roleList?: Roles[];
 
@@ -22,12 +22,14 @@ export class UserPopupComponent  implements OnInit, DoCheck {
 
   private editData: any;
 
-  protected updateForm!: FormGroup<any>;
+  protected userForm!: FormGroup<any>;
 
   protected editFormFlag = false;
 
   protected hidePass = true;
   protected hidePassConf = true;
+
+  protected formTitle!: string;
 
   constructor(
     private builder:    FormBuilder, 
@@ -38,15 +40,8 @@ export class UserPopupComponent  implements OnInit, DoCheck {
     private router:     Router
   ) {
 
-    if (this.storage.getCurrentUserRole() != Roles.ADMIN_ROLE) {
-      this.toastr.error('You do not have access!', '', {
-        positionClass: 'toast-top-center'
-      });
-      this.router.navigate([AppPaths.HOME_PATH]);
-    }
     this.buildRoleList();
     this.buildStatusList();
-    this.buildForm();
   }
 
   ngDoCheck(): void {
@@ -58,14 +53,25 @@ export class UserPopupComponent  implements OnInit, DoCheck {
   ngOnInit(): void {
     if (this.data.userId != null) {
       this.loadUserData(this.data.userId);
+      this.formTitle = "Update User";
+    } else {
+      this.formTitle = "Add User";
     }
+
+    if (this.storage.getCurrentUserRole() != Roles.ADMIN_ROLE) {
+      this.toastr.error('You do not have access!', '', {
+        positionClass: 'toast-top-center'
+      });
+      this.router.navigate([AppPaths.HOME_PATH]);
+    }
+    
+    this.buildForm();
   }
 
   protected loadUserData(id: number): void {
-    this.service.getUserById(id).subscribe(res => {
+    this.service.getEntityById(id).subscribe(res => {
       this.editData = res;
-      console.log(this.editData);
-      this.updateForm.setValue({
+      this.userForm.setValue({
         id:     this.editData.id,
         login:  this.editData.login,
         role:   this.editData.role, 
@@ -83,7 +89,7 @@ export class UserPopupComponent  implements OnInit, DoCheck {
   }
 
   private saveNewUser(): void {
-    this.service.saveNewdUser(this.updateForm.value).subscribe({
+    this.service.saveEntity(this.userForm.value).subscribe({
       next: () => {
         this.toastr.success('User saved.');
         this.dialogRef.close();
@@ -99,7 +105,7 @@ export class UserPopupComponent  implements OnInit, DoCheck {
   }
 
   private saveUpdatedUser(): void {
-    this.service.saveUpdatedUser(this.editData.id, this.updateForm.value).subscribe({
+    this.service.saveUpdatedEntity(this.editData.id, this.userForm.value).subscribe({
       next: () => {
         this.toastr.success('Updated successfully.');
         this.dialogRef.close();
@@ -123,7 +129,7 @@ export class UserPopupComponent  implements OnInit, DoCheck {
   }
 
   private buildEditForm(): void {
-    this.updateForm = this.builder.group({
+    this.userForm = this.builder.group({
       id:   this.builder.control('', Validators.required),
       login:  this.builder.control('', [Validators.required, Validators.minLength(4)]),
       role:   this.builder.control('', Validators.required),
@@ -132,7 +138,7 @@ export class UserPopupComponent  implements OnInit, DoCheck {
   }
 
   private buildAddForm(): void {
-    this.updateForm = this.builder.group({
+    this.userForm = this.builder.group({
       login:  this.builder.control('', [Validators.required, Validators.minLength(4)]),
       password:  this.builder.control('', [Validators.required, Validators.minLength(8)]),
       confirmPassword:  this.builder.control('', [Validators.required, Validators.minLength(8)]),
