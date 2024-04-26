@@ -10,7 +10,7 @@ import { Router } from '@angular/router';
 import { AppPaths } from 'src/app/util/constants/app.paths';
 import { MatDialog } from '@angular/material/dialog';
 import { UserPopupComponent } from '../popup/user.popup.component';
-import { User } from 'src/app/models/user';
+import { User } from 'src/app/_models/user';
 import { environment } from 'src/app/util/constants/environment';
 
 @Component({
@@ -61,7 +61,7 @@ export class UserListComponent implements AfterViewInit {
   }
 
   public loadUsers(): void {
-    this.service.getAllByPageSize(this.pageIndex, this.pageSize).subscribe({
+    this.service.getAllByPageAndSize(this.pageIndex, this.pageSize).subscribe({
       next: (data) => {
         this.totalItems = data.totalElements;
         this.dataSource = new MatTableDataSource<User>(data.content);

@@ -1,36 +1,41 @@
 import { AfterViewInit, Component, ViewChild } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
-import { StatusType } from 'src/app/_models/status.type';
-import { StatusTypeService } from '../status.type.service';
-import { MatDialog } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-import { StorageService } from 'src/app/_services/storage.service';
 import { User } from 'src/app/_models/user';
+import { StorageService } from 'src/app/_services/storage.service';
+import { environment } from 'src/app/util/constants/environment';
+import { ShelfService } from '../shelf.service';
+import { Shelf } from 'src/app/_models/shelf';
 import { AppPaths } from 'src/app/util/constants/app.paths';
-import { GenericPopupComponent } from 'src/app/util/generic.popup/generic.popup.component';
+import { ShelfPopupComponent } from '../shelf.popup/shelf.popup.component';
 import { ModelList } from 'src/app/util/constants/model.list';
 import { Roles } from 'src/app/util/constants/roles';
 
 @Component({
-  selector: 'app-list',
-  templateUrl: './status.type.list.component.html',
-  styleUrl: './status.type.list.component.css'
+  selector: 'app-shelf.list',
+  templateUrl: './shelf.list.component.html',
+  styleUrl: './shelf.list.component.css'
 })
-export class StatusTypeListComponent implements AfterViewInit {
+export class ShelfListComponent implements AfterViewInit {
+  
+  private animationTimings = environment.dialogAnimationTimings;
 
   pageSizeOptions = [5, 10, 15];
 
   displayedColumns: string[] = 
   [
     'id', 
-    'name',
+    'letter',
+    'number',
+    'room',
     'actions'
   ];
 
-  userList: StatusType[] = [];
+  userList: Shelf[] = [];
   dataSource: any;
   pageSize = 5;
   pageIndex = 0;
@@ -39,17 +44,22 @@ export class StatusTypeListComponent implements AfterViewInit {
   @ViewChild(MatSort) sort!: MatSort;
 
   constructor (
-    private service:                StatusTypeService, 
+    private service:                ShelfService, 
     private toastr:                 ToastrService, 
     private storage:                StorageService, 
     private router:                 Router,
     private dialogBox:              MatDialog
   ) {
     this.dataSource = new MatTableDataSource<User>();
-    this.loadTypes();
+    this.loadData();
   }
 
-  private loadTypes(): void {
+  ngAfterViewInit(): void {
+    this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
+  }
+
+  private loadData(): void {
     this.service.getAllByPageAndSize(this.pageIndex, this.pageSize).subscribe({
       next: (data) => {
         this.totalItems = data.totalElements;
@@ -65,25 +75,20 @@ export class StatusTypeListComponent implements AfterViewInit {
     });
   }
 
-  ngAfterViewInit(): void {
-    this.dataSource.paginator = this.paginator;
-    this.dataSource.sort = this.sort;
-  }
-
   onPageChange(event: PageEvent): void {
     this.pageIndex = event.pageIndex;
     this.pageSize = event.pageSize;
-    this.loadTypes();
+    this.loadData();
   }
 
-  protected editStatusType(id: number): void {
-    this.openDialog('1000ms', '600ms', id);
+  protected edit(id: number): void {
+    this.openDialog(this.animationTimings.openAnimationTime, this.animationTimings.closeAnimationTime, id);
   }
 
-  protected deleteStatusType(id: number): void {
+  protected delete(id: number): void {
     this.service.deleteEntityById(id).subscribe({
       next: () => {
-        this.loadTypes();
+        this.loadData();
       },
       error: (data) => {
         if (data.error) {
@@ -95,21 +100,22 @@ export class StatusTypeListComponent implements AfterViewInit {
     });
   }
 
-  private openDialog(enteranimation: any, exitanimation: any, id: number) {
-    const popup = this.dialogBox.open(GenericPopupComponent, {
+  private openDialog(enteranimation: any, exitanimation: any, id: number): void {
+    const popup = this.dialogBox.open(ShelfPopupComponent, {
       enterAnimationDuration: enteranimation,
       exitAnimationDuration: exitanimation,
       width: '30%',
       data: {
         id: id,
         allowedRoles: [
-          Roles.ADMIN_ROLE
+          Roles.ADMIN_ROLE,
+          Roles.USER_ROLE
         ],
-        model: ModelList.STATUS_TYPE
+        model: ModelList.SHELF
       }
     });
     popup.afterClosed().subscribe(() => {
-      this.loadTypes();
+      this.loadData();
     });
   }
 }

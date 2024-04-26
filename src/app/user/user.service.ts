@@ -3,6 +3,7 @@ import { environment } from '../util/constants/environment';
 import { ApiPaths } from '../util/constants/api.paths';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { DataServiceInterface } from '../util/data.service.interface';
 
 const pageString = "?page=";
 
@@ -11,7 +12,7 @@ const pageSizeString = "&size=";
 @Injectable({
   providedIn: 'root'
 })
-export class UserService {
+export class UserService implements DataServiceInterface {
 
   private baseUrl = environment.baseUrl;
   private resourcePath = ApiPaths.USERS_PATH;
@@ -20,7 +21,7 @@ export class UserService {
     private http : HttpClient
   ) { }
 
-  public getAllByPageSize(page : number, size : number): Observable<any> {
+  public getAllByPageAndSize(page : number, size : number): Observable<any> {
 
     return this.http.get(this.generateGetAllUrl(page, size));
   }

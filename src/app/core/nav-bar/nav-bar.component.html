@@ -24,6 +24,9 @@
       <mat-menu #menuRooms="matMenu">
         <button mat-menu-item (click)="addNewRoom()">Add Room</button>
         <button mat-menu-item routerLink="/rooms">Rooms</button>
+        <mat-divider></mat-divider>
+        <button mat-menu-item (click)="addNewShelf()">Add Shelf</button>
+        <button mat-menu-item routerLink="/shelves">Shelves</button>
       </mat-menu>
       <a mat-button (click)="logout()">Logout</a>
     </div>

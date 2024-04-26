@@ -3,6 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { AuthenticationService } from 'src/app/_services/authentication.service';
 import { StorageService } from 'src/app/_services/storage.service';
+import { ShelfPopupComponent } from 'src/app/shelf/shelf.popup/shelf.popup.component';
 import { UserPopupComponent } from 'src/app/user/popup/user.popup.component';
 import { AppPaths } from 'src/app/util/constants/app.paths';
 import { environment } from 'src/app/util/constants/environment';
@@ -55,6 +56,10 @@ export class NavBarComponent implements DoCheck {
     this.openDialogGenericPopup(this.animationTimings.openAnimationTime, this.animationTimings.closeAnimationTime, [Roles.ADMIN_ROLE, Roles.USER_ROLE], ModelList.ROOM, AppPaths.ROOMS_PATH);
   }
 
+  protected addNewShelf(): void {
+    this.openDialogAddShelf(this.animationTimings.openAnimationTime, this.animationTimings.closeAnimationTime);
+  }
+
   private openDialogAddUser(enteranimation: any, exitanimation: any) {
     const popup = this.dialogBox.open(UserPopupComponent, {
       enterAnimationDuration: enteranimation,
@@ -66,6 +71,22 @@ export class NavBarComponent implements DoCheck {
     });
     popup.afterClosed().subscribe(() => {
       if (this.router.url == "/" + AppPaths.USERS_PATH) {
+        window.location.reload();
+      }
+    });
+  }
+
+  private openDialogAddShelf(enteranimation: any, exitanimation: any) {
+    const popup = this.dialogBox.open(ShelfPopupComponent, {
+      enterAnimationDuration: enteranimation,
+      exitAnimationDuration: exitanimation,
+      width: '40%',
+      data: {
+        id: null
+      }
+    });
+    popup.afterClosed().subscribe(() => {
+      if (this.router.url == "/" + AppPaths.SHELVES_PATH) {
         window.location.reload();
       }
     });

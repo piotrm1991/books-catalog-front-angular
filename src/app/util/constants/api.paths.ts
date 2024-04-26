@@ -6,5 +6,6 @@ export enum ApiPaths {
     AUTHORS_PATH = '/authors',
     PUBLISHERS_PATH = '/publishers',
     ROOMS_PATH = '/rooms',
-    CURRENT_ROLE = '/currentUserRole'
+    CURRENT_ROLE = '/currentUserRole',
+    SHELVES_PATH = '/shelves'
 };

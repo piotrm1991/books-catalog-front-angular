@@ -3,12 +3,13 @@ import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
 import { UserListComponent } from './user/list/user.list.component';
-import { AuthGuard } from './guard/permissions.service';
+import { AuthGuard } from './_guard/permissions.service';
 import { AppPaths } from './util/constants/app.paths';
 import { StatusTypeListComponent } from './status.type/list/status.type.list.component';
 import { AuthorListComponent } from './author/list/author.list.component';
 import { PublisherListComponent } from './publisher/list/publisher.list.component';
 import { RoomListComponent } from './room/list/room.list.component';
+import { ShelfListComponent } from './shelf/shelf.list/shelf.list.component';
 
 const routes: Routes = [
   { path: AppPaths.HOME_PATH, component: HomeComponent, canActivate: [AuthGuard] },
@@ -17,7 +18,8 @@ const routes: Routes = [
   { path: AppPaths.STATUS_TYPES_PATH, component: StatusTypeListComponent, canActivate: [AuthGuard] },
   { path: AppPaths.AUTHORS_PATH, component: AuthorListComponent, canActivate: [AuthGuard] },
   { path: AppPaths.PUBLISHERS_PATH, component: PublisherListComponent, canActivate: [AuthGuard] },
-  { path: AppPaths.ROOMS_PATH, component: RoomListComponent, canActivate: [AuthGuard] }
+  { path: AppPaths.ROOMS_PATH, component: RoomListComponent, canActivate: [AuthGuard] },
+  { path: AppPaths.SHELVES_PATH, component: ShelfListComponent, canActivate: [AuthGuard] }
 ];
 
 @NgModule({

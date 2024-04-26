@@ -1,0 +1,29 @@
+<h1 mat-dialog-title>{{ formTitle }}</h1>
+<form [formGroup]="form" (ngSubmit)="save()">
+    <div mat-dialog-content>
+
+        <mat-form-field style="text-align: right">
+            <mat-label>Room</mat-label>
+            <input type="text" matInput [formControl]="roomControl" formControlName="room"  [matAutocomplete]="auto">
+            <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selectedRoom($event)" [displayWith]="getRoomName">
+                <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+                    {{ option.name }}
+                </mat-option>
+            </mat-autocomplete>
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-label>Letter</mat-label>
+            <input formControlName="letter" matInput>
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-label>Number</mat-label>
+            <input formControlName="number" matInput>
+        </mat-form-field>
+    </div>
+    <div mat-dialog-actions>
+        <button type="submit" mat-raised-button color="primary" cdkFocusInitial>Save</button>
+        <button mat-raised-button color="warn" mat-dialog-close>Close</button>
+    </div>
+</form>

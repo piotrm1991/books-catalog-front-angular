@@ -17,6 +17,7 @@ import { StatusTypeModule } from './status.type/status.type.module';
 import { AuthorModule } from './author/author.module';
 import { PublisherModule } from './publisher/publisher.module';
 import { RoomModule } from './room/room.module';
+import { ShelfModule } from './shelf/shelf.module';
 
 @NgModule({
   declarations: [
@@ -37,12 +38,15 @@ import { RoomModule } from './room/room.module';
     AuthorModule,
     PublisherModule,
     RoomModule,
+    ShelfModule,
     ToastrModule.forRoot()
   ],
   providers: [
     // Http Interceptor(s) -  adds with Client Credentials
     [
-      { provide: HTTP_INTERCEPTORS, useClass: HttpRequestInterceptor, multi: true },
+      { 
+        provide: HTTP_INTERCEPTORS, useClass: HttpRequestInterceptor, multi: true 
+      },
       CookieService 
     ],
   ],

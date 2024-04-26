@@ -6,17 +6,17 @@ import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { StorageService } from 'src/app/_services/storage.service';
-import { User } from 'src/app/models/user';
+import { User } from 'src/app/_models/user';
 import { AppPaths } from 'src/app/util/constants/app.paths';
 import { GenericPopupComponent } from 'src/app/util/generic.popup/generic.popup.component';
 import { ModelList } from 'src/app/util/constants/model.list';
 import { Roles } from 'src/app/util/constants/roles';
 import { PublisherService } from '../publisher.service';
 import { environment } from 'src/app/util/constants/environment';
-import { Publisher } from 'src/app/models/publisher';
+import { Publisher } from 'src/app/_models/publisher';
 
 @Component({
-  selector: 'app-list',
+  selector: 'app-publisher-list',
   templateUrl: './publisher.list.component.html',
   styleUrl: './publisher.list.component.css'
 })
@@ -98,7 +98,7 @@ export class PublisherListComponent implements AfterViewInit {
     });
   }
 
-  private openDialog(enteranimation: any, exitanimation: any, id: number) {
+  private openDialog(enteranimation: any, exitanimation: any, id: number): void {
     const popup = this.dialogBox.open(GenericPopupComponent, {
       enterAnimationDuration: enteranimation,
       exitAnimationDuration: exitanimation,

@@ -5,5 +5,6 @@ export enum AppPaths {
     STATUS_TYPES_PATH = 'statusTypes',
     AUTHORS_PATH = 'authors',
     PUBLISHERS_PATH = 'publishers',
-    ROOMS_PATH = 'rooms'
+    ROOMS_PATH = 'rooms',
+    SHELVES_PATH = 'shelves'
 }

@@ -6,13 +6,13 @@ import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { StorageService } from 'src/app/_services/storage.service';
-import { User } from 'src/app/models/user';
+import { User } from 'src/app/_models/user';
 import { AppPaths } from 'src/app/util/constants/app.paths';
 import { GenericPopupComponent } from 'src/app/util/generic.popup/generic.popup.component';
 import { ModelList } from 'src/app/util/constants/model.list';
 import { Roles } from 'src/app/util/constants/roles';
 import { AuthorService } from '../author.service';
-import { Author } from 'src/app/models/author';
+import { Author } from 'src/app/_models/author';
 import { environment } from 'src/app/util/constants/environment';
 
 @Component({
