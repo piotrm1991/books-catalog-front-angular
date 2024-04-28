@@ -11,6 +11,7 @@ import { AppPaths } from 'src/app/_constants/app.paths';
 import { Roles } from 'src/app/user/enums/roles';
 import { startWith, debounceTime, distinctUntilChanged, switchMap, map } from 'rxjs/operators';
 import { Observable } from 'rxjs/internal/Observable';
+import { EMPTY } from 'rxjs';
 
 @Component({
   selector: 'app-shelf.popup',
@@ -41,7 +42,7 @@ export class ShelfPopupComponent implements OnInit {
     private router: Router
   ) {
     this.buildForm();
-
+    
     this.filteredOptions = this.roomControl
       .valueChanges.pipe(
         startWith(''),
@@ -54,6 +55,7 @@ export class ShelfPopupComponent implements OnInit {
   }
 
   ngOnInit(): void {
+
     if (this.data.id != null) {
       this.loadShelfData(this.data.id);
       this.formTitle = "Update Shelf";
@@ -164,12 +166,12 @@ export class ShelfPopupComponent implements OnInit {
 
   protected filter(val: any): Observable<any[]> {
     if (val.name) {
-      val = val.name;
+      return EMPTY;
     }
     return this.serviceRoom.getAll()
       .pipe(
         map(response => response.filter((option: Room) => {
-          let test =  option.name.toLowerCase().indexOf(val.toLowerCase()) === 0;
+          let test = option.name.toLowerCase().indexOf(val.toLowerCase()) === 0;
           return test;
         }))
       )

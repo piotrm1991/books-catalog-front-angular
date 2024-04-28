@@ -138,25 +138,9 @@ export class BookPopupComponent implements OnInit {
     }
   }
 
-  protected getAuthorName(author: Author): string | any {
-    if (author != null) {
-      return author.name;
-    } else {
-      return null;
-    }
-  }
-
-  protected getPublisherName(publisher: Publisher): string | any {
-    if (publisher != null) {
-      return publisher.name;
-    } else {
-      return null;
-    }
-  }
-
-  protected getStatusTypeName(statusType: StatusType): string | any {
-    if (statusType != null) {
-      return statusType.name;
+  protected getDisplayName(option: any): string | any {
+    if (option != null) {
+      return option.name;
     } else {
       return null;
     }
@@ -242,8 +226,8 @@ export class BookPopupComponent implements OnInit {
   }
 
   protected filterAuthors(val: any): Observable<any[]> {
-    if (val.name) {
-      val = val.name;
+    if (typeof val != 'string') {
+      return EMPTY;
     }
     return this.serviceAuthor.getAll()
       .pipe(
@@ -255,8 +239,8 @@ export class BookPopupComponent implements OnInit {
   }
 
   protected filterPublishers(val: any): Observable<any[]> {
-    if (val.name) {
-      val = val.name;
+    if (typeof val != 'string') {
+      return EMPTY;
     }
     return this.servicePublisher.getAll()
       .pipe(
@@ -268,8 +252,8 @@ export class BookPopupComponent implements OnInit {
   }
 
   protected filterStatusTypes(val: any): Observable<any[]> {
-    if (val.name) {
-      val = val.name;
+    if (typeof val != 'string') {
+      return EMPTY;
     }
     return this.serviceStatusType.getAll()
       .pipe(

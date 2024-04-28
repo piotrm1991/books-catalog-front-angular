@@ -1,68 +1,18 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
 import { ApiPaths } from '../_constants/api.paths';
-import { environment } from '../_constants/environment';
-import { DataServiceInterface } from '../_services/data.service.interface';
+import { GenericApiService } from '../_services/generic.api.service';
 
-const pageString = "?page=";
-
-const pageSizeString = "&size=";
-
+/**
+ * Service that holds logic for Shelf requests.
+ * Extends GenericApiService.
+ */
 @Injectable({
   providedIn: 'root'
 })
-export class ShelfService implements DataServiceInterface {
-
-  private baseUrl = environment.baseUrl;
-  private resourcePath = ApiPaths.SHELVES_PATH;
-
-  constructor(
-    private http : HttpClient
-  ) { }
-
-  public getAllByPageAndSize(page : number, size : number): Observable<any> {
-
-    return this.http.get(this.generateGetAllUrl(page, size));
-  }
-
-  private generateGetAllUrl(pageNumber : number, pageSize : number): string {
-
-    return `${this.baseUrl}${this.resourcePath}${pageString}${pageNumber}${pageSizeString}${pageSize}`;
-  }
-
-  public getAll(): Observable<any> {
-
-    return this.http.get(this.generateBaseUrl());
-  }
-
-  private generateBaseUrl(): string {
-
-    return `${this.baseUrl}${this.resourcePath}`;
-  }
-
-  private generateEntityByIdUrl(id: number): string {
-
-    return `${this.baseUrl}${this.resourcePath}\\${id}`;
-  }
-
-  public getEntityById(id: number): Observable<any> {
-
-    return this.http.get(this.generateEntityByIdUrl(id));
-  }
-
-  public saveUpdatedEntity(id: any, userData: any): Observable<any> {
-
-    return this.http.put(this.generateEntityByIdUrl(id), userData);
-  }
-
-  public deleteEntityById(id: number): Observable<any> {
-    
-    return this.http.delete(this.generateEntityByIdUrl(id));
-  }
-
-  public saveEntity(userData: any): Observable<any> {
-
-    return this.http.post(this.generateBaseUrl(), userData);
+export class ShelfService extends GenericApiService {
+  
+  constructor(http: HttpClient){
+    super(http, ApiPaths.SHELVES_PATH);
   }
 }

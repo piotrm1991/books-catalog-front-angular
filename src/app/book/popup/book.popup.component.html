@@ -9,8 +9,10 @@
 
         <mat-form-field style="text-align: right">
             <mat-label>Author</mat-label>
-            <input type="text" matInput [formControl]="authorControl" formControlName="author"  [matAutocomplete]="autoAuthor">
-            <mat-autocomplete #autoAuthor="matAutocomplete" (optionSelected)="selectedAuthor($event)" [displayWith]="getAuthorName">
+            <input type="text" matInput [formControl]="authorControl" formControlName="author"
+                [matAutocomplete]="autoAuthor">
+            <mat-autocomplete #autoAuthor="matAutocomplete" (optionSelected)="selectedAuthor($event)"
+                [displayWith]="getDisplayName">
                 <mat-option *ngFor="let option of filteredOptionsAuthor | async" [value]="option">
                     {{ option.name }}
                 </mat-option>
@@ -19,8 +21,10 @@
 
         <mat-form-field style="text-align: right">
             <mat-label>Publisher</mat-label>
-            <input type="text" matInput [formControl]="publisherControl" formControlName="publisher"  [matAutocomplete]="autoPublisher">
-            <mat-autocomplete #autoPublisher="matAutocomplete" (optionSelected)="selectedPublisher($event)" [displayWith]="getPublisherName">
+            <input type="text" matInput [formControl]="publisherControl" formControlName="publisher"
+                [matAutocomplete]="autoPublisher">
+            <mat-autocomplete #autoPublisher="matAutocomplete" (optionSelected)="selectedPublisher($event)"
+                [displayWith]="getDisplayName">
                 <mat-option *ngFor="let option of filteredOptionsPublisher | async" [value]="option">
                     {{ option.name }}
                 </mat-option>
@@ -29,8 +33,10 @@
 
         <mat-form-field style="text-align: right">
             <mat-label>Status</mat-label>
-            <input type="text" matInput [formControl]="statusTypeControl" formControlName="statusType"  [matAutocomplete]="autoStatusType">
-            <mat-autocomplete #autoStatusType="matAutocomplete" (optionSelected)="selectedStatusType($event)" [displayWith]="getStatusTypeName">
+            <input type="text" matInput [formControl]="statusTypeControl" formControlName="statusType"
+                [matAutocomplete]="autoStatusType">
+            <mat-autocomplete #autoStatusType="matAutocomplete" (optionSelected)="selectedStatusType($event)"
+                [displayWith]="getDisplayName">
                 <mat-option *ngFor="let option of filteredOptionsStatusType | async" [value]="option">
                     {{ option.name }}
                 </mat-option>
@@ -39,8 +45,10 @@
 
         <mat-form-field style="text-align: right">
             <mat-label>Shelf</mat-label>
-            <input type="text" matInput [formControl]="shelfControl" formControlName="shelf"  [matAutocomplete]="autoShelf">
-            <mat-autocomplete #autoShelf="matAutocomplete" (optionSelected)="selectedShelf($event)" [displayWith]="getShelfInfo">
+            <input type="text" matInput [formControl]="shelfControl" formControlName="shelf"
+                [matAutocomplete]="autoShelf">
+            <mat-autocomplete #autoShelf="matAutocomplete" (optionSelected)="selectedShelf($event)"
+                [displayWith]="getShelfInfo">
                 <mat-option *ngFor="let option of filteredOptionsShelf | async" [value]="option">
                     {{ option.room.name + ' - ' + option.letter + '/' + option.number }}
                 </mat-option>

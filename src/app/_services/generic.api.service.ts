@@ -3,61 +3,55 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { DataServiceInterface } from './data.service.interface';
 
-const pageString = "?page=";
-
-const pageSizeString = "&size=";
-
+/**
+ * Generic Api Service that holds logic for preparing and sending HttpRequests.
+ */
 export class GenericApiService implements DataServiceInterface {
 
-  private baseUrl = environment.baseUrl;
+  private readonly baseUrl = environment.baseUrl;
+
+  private readonly pageString = "?page=";
+
+  private readonly pageSizeString = "&size=";
+
+  private readonly API_ROUTES = {
+    getAll: () => `${this.baseUrl}${this.resourcePath}`,
+    getAllByPageAndSize: (page: number, size: number) => `${this.baseUrl}${this.resourcePath}${this.pageString}${page}${this.pageSizeString}${size}`,
+    getEntityUrlById: (id: number) => `${this.baseUrl}${this.resourcePath}\\${id}`
+  };
 
   constructor(
     private http: HttpClient,
     private resourcePath: string
   ) { }
 
-  public getAllByPageAndSize(page : number, size : number): Observable<any> {
+  public getAllByPageAndSize(page: number, size: number): Observable<any> {
 
-    return this.http.get(this.generateGetAllUrl(page, size));
-  }
-
-  private generateGetAllUrl(pageNumber : number, pageSize : number): string {
-
-    return `${this.baseUrl}${this.resourcePath}${pageString}${pageNumber}${pageSizeString}${pageSize}`;
+    return this.http.get(this.API_ROUTES.getAllByPageAndSize(page, size));
   }
 
   public getAll(): Observable<any> {
 
-    return this.http.get(this.generateBaseUrl());
+    return this.http.get(this.API_ROUTES.getAll());
   }
 
   public getEntityById(id: number): Observable<any> {
 
-    return this.http.get(this.generateEntityByIdUrl(id));
-  }
-  
-  private generateEntityByIdUrl(id: number): string {
-
-    return `${this.baseUrl}${this.resourcePath}\\${id}`;
+    return this.http.get(this.API_ROUTES.getEntityUrlById(id));
   }
 
   public saveEntity(data: any): Observable<any> {
 
-    return this.http.post(this.generateBaseUrl(), data);
-  }
-
-  private generateBaseUrl(): string {
-
-    return `${this.baseUrl}${this.resourcePath}`;
+    return this.http.post(this.API_ROUTES.getAll(), data);
   }
 
   public saveUpdatedEntity(id: any, data: any): Observable<any> {
 
-    return this.http.put(this.generateEntityByIdUrl(id), data);
+    return this.http.put(this.API_ROUTES.getEntityUrlById(id), data);
   }
 
   public deleteEntityById(id: number): Observable<any> {
-    
-    return this.http.delete(this.generateEntityByIdUrl(id));
+
+    return this.http.delete(this.API_ROUTES.getEntityUrlById(id));
   }
 }

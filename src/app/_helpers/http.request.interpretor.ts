@@ -5,7 +5,10 @@ import {
 
 import { Observable } from 'rxjs';
 
-/** Inject With Credentials into the request */
+/**
+ * Class takes credentials and Header, that prevents default Basic Auth popup from 
+ * showing up, and injects them into all HttpRequests.
+ */
 @Injectable()
 export class HttpRequestInterceptor implements HttpInterceptor {
 

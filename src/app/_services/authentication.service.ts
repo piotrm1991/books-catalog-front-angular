@@ -3,6 +3,9 @@ import { Injectable } from '@angular/core';
 import { environment } from '../_constants/environment';
 import { ApiPaths } from '../_constants/api.paths';
 
+/**
+ * Service responsible for sending login and logout requests.
+ */
 @Injectable({
   providedIn: 'root'
 })

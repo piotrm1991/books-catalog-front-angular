@@ -5,6 +5,10 @@ import { AppPaths } from '../_constants/app.paths';
 import { Roles } from '../user/enums/roles';
 import { ToastrService } from 'ngx-toastr';
 
+/**
+ * Service PermissionsService checks if user
+ * authorized to see content.
+ */
 @Injectable({
   providedIn: 'root'
 })

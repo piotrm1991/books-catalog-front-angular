@@ -6,8 +6,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from 'src/material.module';
 import { AuthorListComponent } from './list/author.list.component';
 
-
-
 @NgModule({
   declarations: [
     AuthorListComponent

@@ -7,6 +7,10 @@ import { AuthorService } from '../author/author.service';
 import { PublisherService } from '../publisher/publisher.service';
 import { RoomService } from '../room/room.service';
 
+/**
+ * Service that builds form and provides api service based on given model name 
+ * from ModelList const.
+ */
 @Injectable({
   providedIn: 'root'
 })

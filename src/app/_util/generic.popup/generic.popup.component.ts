@@ -1,5 +1,5 @@
-import { Component, Inject, Injector, OnInit, inject } from '@angular/core';
-import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { Component, Inject, OnInit, inject } from '@angular/core';
+import { FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
@@ -7,10 +7,12 @@ import { StorageService } from 'src/app/_services/storage.service';
 import { AppPaths } from '../../_constants/app.paths';
 import { DataServiceInterface } from '../../_services/data.service.interface';
 import { MaterialModule } from 'src/material.module';
-import { BrowserModule } from '@angular/platform-browser';
-import { CommonModule } from '@angular/common';
 import { FormBuilderAndServiceProviderService } from '../../_services/form.builder.and.service.provider.service';
 
+/**
+ * Generic Popup Component for models:
+ * Author, Publisher, Room, StatusType.
+ */
 @Component({
   selector: 'app-generic.popup',
   standalone: true,
@@ -34,12 +36,12 @@ export class GenericPopupComponent implements OnInit {
   private allowedRoles!: string[];
 
   constructor(
-    private toastr:     ToastrService,
-    private dialogRef:  MatDialogRef<GenericPopupComponent>, @Inject(MAT_DIALOG_DATA) public data: any,
-    private storage:    StorageService,
-    private router:     Router,
+    private toastr: ToastrService,
+    private dialogRef: MatDialogRef<GenericPopupComponent>, @Inject(MAT_DIALOG_DATA) public data: any,
+    private storage: StorageService,
+    private router: Router,
     private formServiceProvider: FormBuilderAndServiceProviderService
-  ) { 
+  ) {
 
     if (this.data.model != null) {
       let formServiceResponse = this.formServiceProvider.provideFormAndService(this.data.model);
@@ -60,7 +62,7 @@ export class GenericPopupComponent implements OnInit {
     if (!this.allowedRoles.includes(this.storage.getCurrentUserRole())) {
       this.refuseAccess();
     }
-    
+
     if (this.data.id != null) {
       this.loadData(this.data.id);
       this.modelTitle = "Update " + this.model;
@@ -74,8 +76,8 @@ export class GenericPopupComponent implements OnInit {
     this.service.getEntityById(id).subscribe(res => {
       this.editData = res;
       this.form.setValue({
-        id:     this.editData.id,
-        name:   this.editData.name,
+        id: this.editData.id,
+        name: this.editData.name,
       });
     });
   }

@@ -8,6 +8,9 @@ import { AppPaths } from '../_constants/app.paths';
 const SESSION_KEY = 'session_key';
 const CURRENT_ROLE = 'current_role';
 
+/**
+ * Service responsible for storing and deleting current session key and user role.
+ */
 @Injectable({
   providedIn: 'root'
 })

@@ -36,21 +36,15 @@ export class LoginComponent implements OnInit{
       this.service.login(this.loginForm.value.login, this.loginForm.value.password).subscribe({
         next: (data: string | undefined) => {
           this.storage.logIn();
-          this.toastr.success(data, "", {
-            positionClass: 'toastr-top-center'
-          });
+          this.toastr.success(data);
           this.router.navigate(['']);
         },
         error: () => {
-          this.toastr.error('Invalid credentials!', '', {
-            positionClass: 'toastr-top-center'
-          });
+          this.toastr.error('Invalid credentials!');
         }
       });
     } else {
-      this.toastr.error('Invalid credentials!', '', {
-        positionClass: 'toastr-top-center'
-      });
+      this.toastr.error('Invalid credentials!');
     }
   };
 
