@@ -28,6 +28,11 @@
         <button mat-menu-item (click)="addNewShelf()">Add Shelf</button>
         <button mat-menu-item routerLink="/shelves">Shelves</button>
       </mat-menu>
+      <button mat-button [matMenuTriggerFor]="menuBooks">Books</button>
+      <mat-menu #menuBooks="matMenu">
+        <button mat-menu-item (click)="addNewBook()">Add Book</button>
+        <button mat-menu-item routerLink="/books">Books</button>
+      </mat-menu>
       <a mat-button (click)="logout()">Logout</a>
     </div>
   </mat-toolbar-row>

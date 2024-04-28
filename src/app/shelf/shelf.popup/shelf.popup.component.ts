@@ -8,7 +8,7 @@ import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { StorageService } from 'src/app/_services/storage.service';
 import { AppPaths } from 'src/app/util/constants/app.paths';
-import { Roles } from 'src/app/util/constants/roles';
+import { Roles } from 'src/app/user/enums/roles';
 import { startWith, debounceTime, distinctUntilChanged, switchMap, map } from 'rxjs/operators';
 import { Observable } from 'rxjs/internal/Observable';
 
@@ -18,7 +18,6 @@ import { Observable } from 'rxjs/internal/Observable';
   styleUrl: './shelf.popup.component.css'
 })
 export class ShelfPopupComponent implements OnInit {
-  [x: string]: any;
 
   protected roomList?: Room[];
 

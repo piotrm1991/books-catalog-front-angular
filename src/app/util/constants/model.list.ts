@@ -4,5 +4,6 @@ export enum ModelList {
     PUBLISHER = 'Publisher',
     AUTHOR = 'Author',
     ROOM = 'Room',
-    SHELF = 'Shelf'
+    SHELF = 'Shelf',
+    BOOK = 'Book'
 }

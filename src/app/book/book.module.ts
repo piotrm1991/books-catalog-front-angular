@@ -4,15 +4,15 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from 'src/material.module';
-import { ShelfListComponent } from './list/shelf.list.component';
-import { ShelfPopupComponent } from './shelf.popup/shelf.popup.component';
+import { BookListComponent } from './list/book.list.component';
+import { BookPopupComponent } from './popup/book.popup.component';
 
 
 
 @NgModule({
   declarations: [
-    ShelfListComponent,
-    ShelfPopupComponent
+    BookListComponent,
+    BookPopupComponent
   ],
   imports: [
     MaterialModule,
@@ -22,8 +22,8 @@ import { ShelfPopupComponent } from './shelf.popup/shelf.popup.component';
     ReactiveFormsModule
   ],
   exports: [
-    ShelfListComponent,
-    ShelfPopupComponent
+    BookListComponent,
+    BookPopupComponent
   ]
 })
-export class ShelfModule { }
+export class BookModule { }

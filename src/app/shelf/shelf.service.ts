@@ -31,6 +31,11 @@ export class ShelfService implements DataServiceInterface {
     return `${this.baseUrl}${this.resourcePath}${pageString}${pageNumber}${pageSizeString}${pageSize}`;
   }
 
+  public getAll(): Observable<any> {
+
+    return this.http.get(this.generateBaseUrl());
+  }
+
   private generateBaseUrl(): string {
 
     return `${this.baseUrl}${this.resourcePath}`;

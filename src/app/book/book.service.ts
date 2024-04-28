@@ -1,8 +1,8 @@
-import { Injectable } from '@angular/core';
-import { environment } from '../util/constants/environment';
 import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { ApiPaths } from '../util/constants/api.paths';
+import { environment } from '../util/constants/environment';
 import { DataServiceInterface } from '../util/data.service.interface';
 
 const pageString = "?page=";
@@ -12,10 +12,10 @@ const pageSizeString = "&size=";
 @Injectable({
   providedIn: 'root'
 })
-export class AuthorService implements DataServiceInterface {
+export class BookService implements DataServiceInterface {
 
   private baseUrl = environment.baseUrl;
-  private resourcePath = ApiPaths.AUTHORS_PATH;
+  private resourcePath = ApiPaths.BOOKS_PATH;
 
   constructor(
     private http : HttpClient
@@ -29,11 +29,6 @@ export class AuthorService implements DataServiceInterface {
   private generateGetAllUrl(pageNumber : number, pageSize : number): string {
 
     return `${this.baseUrl}${this.resourcePath}${pageString}${pageNumber}${pageSizeString}${pageSize}`;
-  }
-
-  public getAll(): Observable<any> {
-
-    return this.http.get(this.generateBaseUrl());
   }
 
   public getEntityById(id: number): Observable<any> {

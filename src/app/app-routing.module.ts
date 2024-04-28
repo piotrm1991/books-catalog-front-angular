@@ -9,7 +9,8 @@ import { StatusTypeListComponent } from './status.type/list/status.type.list.com
 import { AuthorListComponent } from './author/list/author.list.component';
 import { PublisherListComponent } from './publisher/list/publisher.list.component';
 import { RoomListComponent } from './room/list/room.list.component';
-import { ShelfListComponent } from './shelf/shelf.list/shelf.list.component';
+import { ShelfListComponent } from './shelf/list/shelf.list.component';
+import { BookListComponent } from './book/list/book.list.component';
 
 const routes: Routes = [
   { path: AppPaths.HOME_PATH, component: HomeComponent, canActivate: [AuthGuard] },
@@ -19,7 +20,8 @@ const routes: Routes = [
   { path: AppPaths.AUTHORS_PATH, component: AuthorListComponent, canActivate: [AuthGuard] },
   { path: AppPaths.PUBLISHERS_PATH, component: PublisherListComponent, canActivate: [AuthGuard] },
   { path: AppPaths.ROOMS_PATH, component: RoomListComponent, canActivate: [AuthGuard] },
-  { path: AppPaths.SHELVES_PATH, component: ShelfListComponent, canActivate: [AuthGuard] }
+  { path: AppPaths.SHELVES_PATH, component: ShelfListComponent, canActivate: [AuthGuard] },
+  { path: AppPaths.BOOKS_PATH, component: BookListComponent, canActivate: [AuthGuard] }
 ];
 
 @NgModule({

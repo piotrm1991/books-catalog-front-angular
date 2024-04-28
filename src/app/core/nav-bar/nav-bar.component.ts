@@ -8,8 +8,9 @@ import { UserPopupComponent } from 'src/app/user/popup/user.popup.component';
 import { AppPaths } from 'src/app/util/constants/app.paths';
 import { environment } from 'src/app/util/constants/environment';
 import { ModelList } from 'src/app/util/constants/model.list';
-import { Roles } from 'src/app/util/constants/roles';
+import { Roles } from 'src/app/user/enums/roles';
 import { GenericPopupComponent } from 'src/app/util/generic.popup/generic.popup.component';
+import { BookPopupComponent } from 'src/app/book/popup/book.popup.component';
 
 @Component({
   selector: 'nav-bar',
@@ -58,6 +59,26 @@ export class NavBarComponent implements DoCheck {
 
   protected addNewShelf(): void {
     this.openDialogAddShelf(this.animationTimings.openAnimationTime, this.animationTimings.closeAnimationTime);
+  }
+
+  protected addNewBook(): void {
+    this.openDialogAddBook(this.animationTimings.openAnimationTime, this.animationTimings.closeAnimationTime);
+  }
+
+  private openDialogAddBook(enteranimation: any, exitanimation: any) {
+    const popup = this.dialogBox.open(BookPopupComponent, {
+      enterAnimationDuration: enteranimation,
+      exitAnimationDuration: exitanimation,
+      width: '40%',
+      data: {
+        id: null
+      }
+    });
+    popup.afterClosed().subscribe(() => {
+      if (this.router.url == "/" + AppPaths.BOOKS_PATH) {
+        window.location.reload();
+      }
+    });
   }
 
   private openDialogAddUser(enteranimation: any, exitanimation: any) {

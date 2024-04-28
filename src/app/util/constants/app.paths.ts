@@ -6,5 +6,6 @@ export enum AppPaths {
     AUTHORS_PATH = 'authors',
     PUBLISHERS_PATH = 'publishers',
     ROOMS_PATH = 'rooms',
-    SHELVES_PATH = 'shelves'
+    SHELVES_PATH = 'shelves',
+    BOOKS_PATH = 'books'
 }

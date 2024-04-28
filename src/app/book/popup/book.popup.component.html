@@ -1,0 +1,55 @@
+<h1 mat-dialog-title>{{ formTitle }}</h1>
+<form [formGroup]="form" (ngSubmit)="save()">
+    <div mat-dialog-content>
+
+        <mat-form-field>
+            <mat-label>Title</mat-label>
+            <input formControlName="title" matInput>
+        </mat-form-field>
+
+        <mat-form-field style="text-align: right">
+            <mat-label>Author</mat-label>
+            <input type="text" matInput [formControl]="authorControl" formControlName="author"  [matAutocomplete]="autoAuthor">
+            <mat-autocomplete #autoAuthor="matAutocomplete" (optionSelected)="selectedAuthor($event)" [displayWith]="getAuthorName">
+                <mat-option *ngFor="let option of filteredOptionsAuthor | async" [value]="option">
+                    {{ option.name }}
+                </mat-option>
+            </mat-autocomplete>
+        </mat-form-field>
+
+        <mat-form-field style="text-align: right">
+            <mat-label>Publisher</mat-label>
+            <input type="text" matInput [formControl]="publisherControl" formControlName="publisher"  [matAutocomplete]="autoPublisher">
+            <mat-autocomplete #autoPublisher="matAutocomplete" (optionSelected)="selectedPublisher($event)" [displayWith]="getPublisherName">
+                <mat-option *ngFor="let option of filteredOptionsPublisher | async" [value]="option">
+                    {{ option.name }}
+                </mat-option>
+            </mat-autocomplete>
+        </mat-form-field>
+
+        <mat-form-field style="text-align: right">
+            <mat-label>Status</mat-label>
+            <input type="text" matInput [formControl]="statusTypeControl" formControlName="statusType"  [matAutocomplete]="autoStatusType">
+            <mat-autocomplete #autoStatusType="matAutocomplete" (optionSelected)="selectedStatusType($event)" [displayWith]="getStatusTypeName">
+                <mat-option *ngFor="let option of filteredOptionsStatusType | async" [value]="option">
+                    {{ option.name }}
+                </mat-option>
+            </mat-autocomplete>
+        </mat-form-field>
+
+        <mat-form-field style="text-align: right">
+            <mat-label>Shelf</mat-label>
+            <input type="text" matInput [formControl]="shelfControl" formControlName="shelf"  [matAutocomplete]="autoShelf">
+            <mat-autocomplete #autoShelf="matAutocomplete" (optionSelected)="selectedShelf($event)" [displayWith]="getShelfInfo">
+                <mat-option *ngFor="let option of filteredOptionsShelf | async" [value]="option">
+                    {{ option.room.name + ' - ' + option.letter + '/' + option.number }}
+                </mat-option>
+            </mat-autocomplete>
+        </mat-form-field>
+
+    </div>
+    <div mat-dialog-actions>
+        <button type="submit" mat-raised-button color="primary" cdkFocusInitial>Save</button>
+        <button mat-raised-button color="warn" mat-dialog-close>Close</button>
+    </div>
+</form>

@@ -6,11 +6,10 @@ import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { StorageService } from 'src/app/_services/storage.service';
-import { User } from 'src/app/_models/user';
 import { AppPaths } from 'src/app/util/constants/app.paths';
 import { GenericPopupComponent } from 'src/app/util/generic.popup/generic.popup.component';
 import { ModelList } from 'src/app/util/constants/model.list';
-import { Roles } from 'src/app/util/constants/roles';
+import { Roles } from 'src/app/user/enums/roles';
 import { environment } from 'src/app/util/constants/environment';
 import { RoomService } from '../room.service';
 import { Room } from 'src/app/_models/room';
@@ -48,7 +47,7 @@ export class RoomListComponent implements AfterViewInit {
     private router:                 Router,
     private dialogBox:              MatDialog
   ) {
-    this.dataSource = new MatTableDataSource<User>();
+    this.dataSource = new MatTableDataSource<Room>();
     this.loadData();
   }
 
@@ -56,7 +55,7 @@ export class RoomListComponent implements AfterViewInit {
     this.service.getAllByPageAndSize(this.pageIndex, this.pageSize).subscribe({
       next: (data) => {
         this.totalItems = data.totalElements;
-        this.dataSource = new MatTableDataSource<User>(data.content);
+        this.dataSource = new MatTableDataSource<Room>(data.content);
       },
       error: () => {
         this.storage.logOut();

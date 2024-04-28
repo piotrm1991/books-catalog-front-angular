@@ -18,6 +18,7 @@ import { AuthorModule } from './author/author.module';
 import { PublisherModule } from './publisher/publisher.module';
 import { RoomModule } from './room/room.module';
 import { ShelfModule } from './shelf/shelf.module';
+import { BookModule } from './book/book.module';
 
 @NgModule({
   declarations: [
@@ -39,6 +40,7 @@ import { ShelfModule } from './shelf/shelf.module';
     PublisherModule,
     RoomModule,
     ShelfModule,
+    BookModule,
     ToastrModule.forRoot()
   ],
   providers: [

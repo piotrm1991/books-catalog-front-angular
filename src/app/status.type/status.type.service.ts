@@ -31,6 +31,11 @@ export class StatusTypeService implements DataServiceInterface {
     return `${this.baseUrl}${this.resourcePath}${pageString}${pageNumber}${pageSizeString}${pageSize}`;
   }
 
+  public getAll(): Observable<any> {
+
+    return this.http.get(this.generateBaseUrl());
+  }
+
   public getEntityById(id: number): Observable<any> {
 
     return this.http.get(this.generateEntityByIdUrl(id));
