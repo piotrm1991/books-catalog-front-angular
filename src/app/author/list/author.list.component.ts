@@ -6,13 +6,13 @@ import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { StorageService } from 'src/app/_services/storage.service';
-import { AppPaths } from 'src/app/util/constants/app.paths';
-import { GenericPopupComponent } from 'src/app/util/generic.popup/generic.popup.component';
-import { ModelList } from 'src/app/util/constants/model.list';
+import { AppPaths } from 'src/app/_constants/app.paths';
+import { GenericPopupComponent } from 'src/app/_util/generic.popup/generic.popup.component';
+import { ModelList } from 'src/app/_constants/model.list';
 import { Roles } from 'src/app/user/enums/roles';
 import { AuthorService } from '../author.service';
 import { Author } from 'src/app/_models/author';
-import { environment } from 'src/app/util/constants/environment';
+import { environment } from 'src/app/_constants/environment';
 
 @Component({
   selector: 'app-author-list',

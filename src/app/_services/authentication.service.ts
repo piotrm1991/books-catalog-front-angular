@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { environment } from '../util/constants/environment';
-import { ApiPaths } from '../util/constants/api.paths';
+import { environment } from '../_constants/environment';
+import { ApiPaths } from '../_constants/api.paths';
 
 @Injectable({
   providedIn: 'root'

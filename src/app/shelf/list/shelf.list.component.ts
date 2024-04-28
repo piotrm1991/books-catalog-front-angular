@@ -6,12 +6,12 @@ import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { StorageService } from 'src/app/_services/storage.service';
-import { environment } from 'src/app/util/constants/environment';
+import { environment } from 'src/app/_constants/environment';
 import { ShelfService } from '../shelf.service';
 import { Shelf } from 'src/app/_models/shelf';
-import { AppPaths } from 'src/app/util/constants/app.paths';
+import { AppPaths } from 'src/app/_constants/app.paths';
 import { ShelfPopupComponent } from '../shelf.popup/shelf.popup.component';
-import { ModelList } from 'src/app/util/constants/model.list';
+import { ModelList } from 'src/app/_constants/model.list';
 import { Roles } from 'src/app/user/enums/roles';
 
 @Component({

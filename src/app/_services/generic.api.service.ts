@@ -1,24 +1,19 @@
-import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
-import { ApiPaths } from '../_constants/api.paths';
 import { environment } from '../_constants/environment';
-import { DataServiceInterface } from '../_services/data.service.interface';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { DataServiceInterface } from './data.service.interface';
 
 const pageString = "?page=";
 
 const pageSizeString = "&size=";
 
-@Injectable({
-  providedIn: 'root'
-})
-export class ShelfService implements DataServiceInterface {
+export class GenericApiService implements DataServiceInterface {
 
   private baseUrl = environment.baseUrl;
-  private resourcePath = ApiPaths.SHELVES_PATH;
 
   constructor(
-    private http : HttpClient
+    private http: HttpClient,
+    private resourcePath: string
   ) { }
 
   public getAllByPageAndSize(page : number, size : number): Observable<any> {
@@ -36,33 +31,33 @@ export class ShelfService implements DataServiceInterface {
     return this.http.get(this.generateBaseUrl());
   }
 
-  private generateBaseUrl(): string {
+  public getEntityById(id: number): Observable<any> {
 
-    return `${this.baseUrl}${this.resourcePath}`;
+    return this.http.get(this.generateEntityByIdUrl(id));
   }
-
+  
   private generateEntityByIdUrl(id: number): string {
 
     return `${this.baseUrl}${this.resourcePath}\\${id}`;
   }
 
-  public getEntityById(id: number): Observable<any> {
+  public saveEntity(data: any): Observable<any> {
 
-    return this.http.get(this.generateEntityByIdUrl(id));
+    return this.http.post(this.generateBaseUrl(), data);
   }
 
-  public saveUpdatedEntity(id: any, userData: any): Observable<any> {
+  private generateBaseUrl(): string {
 
-    return this.http.put(this.generateEntityByIdUrl(id), userData);
+    return `${this.baseUrl}${this.resourcePath}`;
+  }
+
+  public saveUpdatedEntity(id: any, data: any): Observable<any> {
+
+    return this.http.put(this.generateEntityByIdUrl(id), data);
   }
 
   public deleteEntityById(id: number): Observable<any> {
     
     return this.http.delete(this.generateEntityByIdUrl(id));
-  }
-
-  public saveEntity(userData: any): Observable<any> {
-
-    return this.http.post(this.generateBaseUrl(), userData);
   }
 }

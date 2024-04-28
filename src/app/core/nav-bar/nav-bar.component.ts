@@ -5,11 +5,11 @@ import { AuthenticationService } from 'src/app/_services/authentication.service'
 import { StorageService } from 'src/app/_services/storage.service';
 import { ShelfPopupComponent } from 'src/app/shelf/shelf.popup/shelf.popup.component';
 import { UserPopupComponent } from 'src/app/user/popup/user.popup.component';
-import { AppPaths } from 'src/app/util/constants/app.paths';
-import { environment } from 'src/app/util/constants/environment';
-import { ModelList } from 'src/app/util/constants/model.list';
+import { AppPaths } from 'src/app/_constants/app.paths';
+import { environment } from 'src/app/_constants/environment';
+import { ModelList } from 'src/app/_constants/model.list';
 import { Roles } from 'src/app/user/enums/roles';
-import { GenericPopupComponent } from 'src/app/util/generic.popup/generic.popup.component';
+import { GenericPopupComponent } from 'src/app/_util/generic.popup/generic.popup.component';
 import { BookPopupComponent } from 'src/app/book/popup/book.popup.component';
 
 @Component({

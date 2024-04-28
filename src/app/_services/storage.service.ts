@@ -3,7 +3,7 @@ import { CookieService } from 'ngx-cookie-service';
 import { AuthenticationService } from './authentication.service';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-import { AppPaths } from '../util/constants/app.paths';
+import { AppPaths } from '../_constants/app.paths';
 
 const SESSION_KEY = 'session_key';
 const CURRENT_ROLE = 'current_role';

@@ -4,7 +4,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { StorageService } from 'src/app/_services/storage.service';
-import { AppPaths } from 'src/app/util/constants/app.paths';
+import { AppPaths } from 'src/app/_constants/app.paths';
 import { Roles } from 'src/app/user/enums/roles';
 import { UserService } from '../user.service';
 import { Statuses } from 'src/app/user/enums/statuses';

@@ -11,7 +11,7 @@ import { RoomService } from 'src/app/room/room.service';
 import { ShelfPopupComponent } from 'src/app/shelf/shelf.popup/shelf.popup.component';
 import { ShelfService } from 'src/app/shelf/shelf.service';
 import { Roles } from 'src/app/user/enums/roles';
-import { AppPaths } from 'src/app/util/constants/app.paths';
+import { AppPaths } from 'src/app/_constants/app.paths';
 import { BookService } from '../book.service';
 import { Author } from 'src/app/_models/author';
 import { StatusType } from 'src/app/_models/status.type';

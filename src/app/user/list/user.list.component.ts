@@ -7,11 +7,11 @@ import { MatSort } from '@angular/material/sort';
 import { ToastrService } from 'ngx-toastr';
 import { StorageService } from 'src/app/_services/storage.service';
 import { Router } from '@angular/router';
-import { AppPaths } from 'src/app/util/constants/app.paths';
+import { AppPaths } from 'src/app/_constants/app.paths';
 import { MatDialog } from '@angular/material/dialog';
 import { UserPopupComponent } from '../popup/user.popup.component';
 import { User } from 'src/app/_models/user';
-import { environment } from 'src/app/util/constants/environment';
+import { environment } from 'src/app/_constants/environment';
 
 @Component({
   selector: 'app-user.list',

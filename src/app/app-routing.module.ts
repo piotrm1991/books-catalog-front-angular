@@ -4,7 +4,7 @@ import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
 import { UserListComponent } from './user/list/user.list.component';
 import { AuthGuard } from './_guard/permissions.service';
-import { AppPaths } from './util/constants/app.paths';
+import { AppPaths } from './_constants/app.paths';
 import { StatusTypeListComponent } from './status.type/list/status.type.list.component';
 import { AuthorListComponent } from './author/list/author.list.component';
 import { PublisherListComponent } from './publisher/list/publisher.list.component';

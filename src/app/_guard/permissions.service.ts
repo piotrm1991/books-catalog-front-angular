@@ -1,7 +1,7 @@
 import { Injectable, inject  } from '@angular/core';
 import { ActivatedRouteSnapshot, CanActivateFn , Router, RouterStateSnapshot } from '@angular/router';
 import { StorageService } from '../_services/storage.service';
-import { AppPaths } from '../util/constants/app.paths';
+import { AppPaths } from '../_constants/app.paths';
 import { Roles } from '../user/enums/roles';
 import { ToastrService } from 'ngx-toastr';
 

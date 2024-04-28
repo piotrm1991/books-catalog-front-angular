@@ -4,12 +4,12 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { StorageService } from 'src/app/_services/storage.service';
-import { AppPaths } from '../constants/app.paths';
-import { DataServiceInterface } from '../data.service.interface';
+import { AppPaths } from '../../_constants/app.paths';
+import { DataServiceInterface } from '../../_services/data.service.interface';
 import { MaterialModule } from 'src/material.module';
 import { BrowserModule } from '@angular/platform-browser';
 import { CommonModule } from '@angular/common';
-import { FormBuilderAndServiceProviderService } from '../form.builder.and.service.provider.service';
+import { FormBuilderAndServiceProviderService } from '../../_services/form.builder.and.service.provider.service';
 
 @Component({
   selector: 'app-generic.popup',

@@ -7,7 +7,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { StorageService } from 'src/app/_services/storage.service';
-import { AppPaths } from 'src/app/util/constants/app.paths';
+import { AppPaths } from 'src/app/_constants/app.paths';
 import { Roles } from 'src/app/user/enums/roles';
 import { startWith, debounceTime, distinctUntilChanged, switchMap, map } from 'rxjs/operators';
 import { Observable } from 'rxjs/internal/Observable';
